@@ -1,20 +1,44 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition
 from scripts.db_util import insert_user, fetch_user, UserNotFoundError
+import datetime
 
 
 app = Flask(__name__)
 app.secret_key = 'HrRdpsuJjIiOiPVdpqUk'
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=60)
+
+
+
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+@app.route("/logout")
+def logout():
+        session.pop('userName', None)
+        session.pop('teamName', None)
+        session.pop('emailAddress', None)
+        return redirect('/login') 
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return render_template("login.html")
+        session.pop('userName', None)
+        session.pop('teamName', None)
+        session.pop('emailAddress', None)
+        return render_template('login.html')
     else:
         userName = request.form['username']
         password = request.form['password']

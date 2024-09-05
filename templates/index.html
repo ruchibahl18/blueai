@@ -136,6 +136,10 @@
                                 <i class="icon-1"></i>
                                 <a href="mailto:{{session['userName']}}">{{session['userName']}}</a>
                             </li>
+                            <li>
+                                <i class="icon-20"></i>
+                                <a href="/logout">Logout</a>
+                            </li>
                         {% endif %}
                         </ul>
                     </div>
@@ -169,8 +173,11 @@
                                 </div>
                             </nav>
                             <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                                {% if not session['userName'] %}
+                                    <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                    <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                                {% endif %}
+                                
                             </div>
                         </div>
                     </div>
