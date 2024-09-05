@@ -1,0 +1,6 @@
+altair==4.0
+transformers
+google-generativeai
+db-sqlite3
+flask
+python-dotenv

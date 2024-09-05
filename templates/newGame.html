@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>BLUE AI</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="../static/css/font-awesome-all.css" rel="stylesheet">
+<link href="../static/css/flaticon.css" rel="stylesheet">
+<link href="../static/css/owl.css" rel="stylesheet">
+<link href="../static/css/bootstrap.css" rel="stylesheet">
+<link href="../static/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="../static/css/animate.css" rel="stylesheet">
+<link href="../static/css/elpath.css" rel="stylesheet">
+<link href="../static/css/color/theme-color.css" id="jssDefault" rel="stylesheet">
+<link href="../static/css/switcher-style.css" rel="stylesheet">
+<link href="../static/css/rtl.css" rel="stylesheet">
+<link href="../static/css/style.css" rel="stylesheet">
+<link href="../static/css/module-css/page-title.css" rel="stylesheet">
+<link href="../static/css/module-css/contact.css" rel="stylesheet">
+<link href="../static/css/module-css/subscribe.css" rel="stylesheet">
+<link href="../static/css/responsive.css" rel="stylesheet">
+
+</head>
+
+
+<!-- page wrapper -->
+<body>
+
+    <div class="boxed_wrapper ltr">
+
+
+
+        <!-- preloader -->
+        <div class="loader-wrap">
+            <div class="preloader">
+                <div class="preloader-close">close</div>
+                <div id="handle-preloader" class="handle-preloader">
+                    <div class="animation-preloader">
+                        <div class="spinner"></div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="b" class="letters-loading">
+                                b
+                            </span>
+                            <span data-text-preloader="l" class="letters-loading">
+                                l
+                            </span>
+                            <span data-text-preloader="u" class="letters-loading">
+                                u
+                            </span>
+                            <span data-text-preloader="e" class="letters-loading">
+                                e
+                            </span>
+                            <span data-text-preloader="a" class="letters-loading">
+                                a
+                            </span>
+                            <span data-text-preloader="i" class="letters-loading">
+                                i
+                            </span>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+
+        <!-- page-direction -->
+        <div class="page_direction">
+            <div class="demo-rtl direction_switch"><button class="rtl">RTL</button></div>
+            <div class="demo-ltr direction_switch"><button class="ltr">LTR</button></div>
+        </div>
+        <!-- page-direction end -->
+
+
+        <!-- switcher menu -->
+        <div class="switcher">
+            <div class="switch_btn">
+                <button><i class="fas fa-palette"></i></button>
+            </div>
+            <div class="switch_menu">
+                <!-- color changer -->
+                <div class="switcher_container">
+                    <ul id="styleOptions" title="switch styling">
+                        <li>
+                            <a href="javascript: void(0)" data-theme="theme-color" class="theme-color"></a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" data-theme="pink" class="pink-color"></a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" data-theme="violet" class="violet-color"></a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" data-theme="crimson" class="crimson-color"></a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" data-theme="orange" class="orange-color"></a>
+                        </li>
+                    </ul>
+                </div> 
+            </div>
+        </div>
+        <!-- end switcher menu -->
+        <!-- main header -->
+        <header class="main-header">
+            <!-- header-top -->
+            <div class="header-top">
+                <div class="large-container">
+                    <div class="top-inner">
+                        <ul class="links-list clearfix">
+                        </ul>
+                        <ul class="info-list clearfix"> 
+                        {% if session['userName'] %}
+                            <li>
+                                <i class="icon-1"></i>
+                                <a href="mailto:{{session['userName']}}">{{session['userName']}}</a>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="large-container">
+                    <div class="outer-box">
+                        <div class="logo-box">
+                            <div class="shape"></div>
+                            <figure class="logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></figure>
+                        </div>
+                        <div class="menu-area">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler">
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </div>
+                            <nav class="main-menu navbar-expand-md navbar-light clearfix">
+                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        <li><a href="index.html">Home</a>
+                                        </li>
+                                        <li class="current"><a href="newGame.html">Play</a></li>
+                                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li> 
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="menu-right-content ml_70">
+                                <a href="newGame.html" class="theme-btn btn-two mr_20">Start New Game</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="large-container">
+                    <div class="outer-box">
+                        <div class="logo-box">
+                            <div class="shape"></div>
+                            <figure class="logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></figure>
+                        </div>
+                        <div class="menu-area">
+                            <nav class="main-menu clearfix">
+                                <!--Keep This Empty / Menu will come through Javascript-->
+                            </nav>
+                            <div class="menu-right-content ml_70">
+                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->
+
+
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+            
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="/"><img src="../static/images/logo.png" alt="" title=""></a></div>
+                <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+                <div class="contact-info">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Chicago 12, Melborne City, USA</li>
+                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                        <li><a href="mailto:attul@redoctopusinnovation.com">attul@redoctopusinnovation.com</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="/"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="/"><span class="fab fa-facebook-square"></span></a></li>
+                        <li><a href="/"><span class="fab fa-pinterest-p"></span></a></li>
+                        <li><a href="/"><span class="fab fa-instagram"></span></a></li>
+                        <li><a href="/"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+
+        <!-- contact-section -->
+        <section class="contact-section pt_120 pb_120">
+            <div class="auto-container">
+                <div class="sec-title centred mb_70">
+                    <h2>Proposition Evaluation Game</h2>
+                </div>
+                <div class="form-inner">
+                    <form class="default-form" id="generate-proposition-form" name="generate-proposition-form"> 
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div class="select-box">
+                                    <select class="wide" name="city">
+                                       <option data-display="Select Town">Select Town</option>
+                                       <option value="CharlesTown">CharlesTown</option>
+                                       <option value="Limburg">Limburg</option>
+                                    </select>
+                                </div>                               
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div class="select-box">
+                                    <select class="wide" name="productType">
+                                       <option data-display="Select Product">Select Product</option>
+                                       <option value="Curent">Curent</option>
+                                       <option value="Mortgage">Mortgage</option>
+                                       <option value="Credit Card">Credit Card</option>
+                                       <option value="Crypto">Crypto</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <input type="number" name="subcount1" min="0" required="" placeholder="Please enter your subscriber take up target for year 1">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <input type="number" name="subcount2" min="0" required="" placeholder="Please enter your subscriber take up target for year 2">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <input type="number" name="subcount3" min="0" required="" placeholder="Please enter your subscriber take up target for year 3">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <input type="text" name="productName" required="" placeholder="Please enter your product name">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>Please select top 3 money needs that you are targeting for your customer</span></div>
+                                <select class="wide form-select needs" name="moneyNeeds" multiple>
+                                    {%for need in moneyNeeds%} 
+                                    <option value="{{ need }}">{{need}}</option>
+                                    {%endfor%}                                    
+                                </select>
+                                
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>Please select top 3 customer experience needs that you are targeting for your customer</span></div>
+                                <select class="wide form-select needs" name="customerExpNeeds" multiple>
+                                    {%for need in customerExpNeeds%} 
+                                    <option value="{{ need }}">{{need}}</option>
+                                    {%endfor%}                                    
+                                </select>
+                                
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>Please select top 3 sustainability needs that you are targeting for your customer</span></div>
+                                <select class="wide form-select needs" name="sustainabilityNeeds" multiple>
+                                    {%for need in sustainabilityNeeds%} 
+                                    <option value="{{ need }}">{{need}}</option>
+                                    {%endfor%}                                    
+                                </select>
+                                
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
+                                <button class="theme-btn btn-one" type="submit" name="generate-proposition" id="generate-proposition">Generate Sample Proposition</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-inner">
+                    <form id="submit-proposition-form" style="display: none;"> 
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <textarea name="proposition" id="proposition"></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
+                                <button class="theme-btn btn-one" type="submit" name="submit-proposition" id="submit-proposition">Submit Proposition</button>
+                            </div>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </section>
+        <!-- contact-section end -->
+
+        <!-- main-footer -->
+        <footer class="main-footer">
+            <div class="widget-section">
+                <div class="pattern-layer">
+                    <div class="pattern-1" style="background-image: url(../static/images/shape/shape-8.png);"></div>
+                    <div class="pattern-2" style="background-image: url(../static/images/shape/shape-9.png);"></div>
+                </div>
+                <div class="auto-container">
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget logo-widget">
+                                <figure class="footer-logo"><a href="/"><img src="../static/images/logo-2.png" alt=""></a></figure>
+                                <p>Blue AI presents GAIM. The ultimate marketing simulation tool</p>
+                                <ul class="social-links">
+                                    <li><a href="/"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="/"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="/"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom centred">
+                <div class="auto-container">
+                    <div class="copyright"><p>Copyright 2024 by <a href="/">Blue AI</a>. All Right Reserved.</p></div>
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+
+
+        <div id="dialog-content" class="content_block_one" style="display:none;max-width:500px;">
+            <div class="content-box ml_40" >
+                <div class="sec-title mb_20">
+                    <h6>Result</h2>
+                </div>
+                
+                    <p class='text-box mb_40' id="result">
+                    </p>
+                    <p class="inner-box mb_45" id="subscriberDiff">
+                    </p>
+            </div>
+          </div>
+          <button id="modal-button" data-fancybox data-src="#dialog-content" hidden>Launch Dialog</button>   
+
+        <!--Scroll to top-->
+        <div class="scroll-to-top">
+            <div>
+                <div class="scroll-top-inner">
+                    <div class="scroll-bar">
+                        <div class="bar-inner"></div>
+                    </div>
+                    <div class="scroll-bar-text">Go To Top</div>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll to top end -->
+        
+    </div>
+
+
+    <!-- jequery plugins -->
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.js"></script>
+    <script src="../static/js/wow.js"></script>
+    <script src="../static/js/validation.js"></script>
+    <script src="../static/js/jquery.fancybox.js"></script>
+    <script src="../static/js/appear.js"></script>
+    <script src="../static/js/isotope.js"></script>
+    <script src="../static/js/parallax-scroll.js"></script>
+    <script src="../static/js/jQuery.style.switcher.min.js"></script>
+
+    <!-- main-js -->
+    <script src="../static/js/script.js"></script>
+    <script>
+          $(".needs").change(function () {
+            if($(this).children("option:selected").length >= 3) {
+                alert("You can only select maximum 3 options")
+            }
+
+            $("#generate-proposition").unbind().click( function (e) {
+                e.preventDefault()
+                
+                 $.ajax({
+                    type: 'POST',
+                    async:false,
+                    url: '/generate-proposition',
+                    data: $('#generate-proposition-form').serialize(),
+                    success: function(data){
+                     $('#proposition').val(data)
+                     $('#submit-proposition-form').css({"display": "block"})
+                 }})
+                
+                                
+            })
+
+            
+            $("#submit-proposition").unbind().click( function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: 'POST',
+                    async:false,
+                    url: '/submit-proposition',
+                    data: $('#generate-proposition-form').serialize()+"&"+$('#submit-proposition-form').serialize(),
+                    success: function(data){
+                        topologiesText = '<span>Overall your targeted demographic and proposition are focusing the three topologies below<span><br><ul>'
+                        data['matchingTopologies'].forEach(element => {
+                            topologiesText = topologiesText + '<li>'+element+'</li>'
+                        });   
+                        topologiesText = topologiesText + '</ul>'
+                        topologiesText = topologiesText + '<br> For your proposition the total predicted subscriber take out count is '+ data['predictedSubscriberTakeOut']
+                        $('#result').html(topologiesText)
+
+                        if(data['subscriberDiff'] < 0) {
+                            $('#subscriberDiff').html('Overall there is not a close match of your proposition to the main demographic. Takeout score difference = '+data['subscriberDiff'])
+                        }
+                        else if(data['subscriberDiff'] == 0) {
+                            $('#subscriberDiff').html('Amazing! Your proposition  exactly match the target subscriber take oup for year 3')
+                        }
+                        else {
+                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the target subscriber take up for year 3. Additional takeout = '+data['subscriberDiff'])
+                            
+                        }
+                        $('#modal-button').fancybox().trigger('click');
+
+
+                 }})
+            })
+
+            /*
+                   <div id="dialog-content" style="display:none;max-width:500px;">
+            <h2>Result</h2>
+            <p id="result">
+            </p>
+            <p id="subscriberDiff">
+            </p>
+          </div> 
+            */
+        });
+    </script>
+
+</body><!-- End of .page_wrapper -->
+</html>
+
