@@ -62,7 +62,7 @@ def register():
         emailAddress = request.form['email']
         password = request.form['password']
         insert_user(userName, teamName, emailAddress, password)
-        return render_template("login.html", msg="Thank you for Registering with us. Please login with your details")
+        return render_template("login.html", msg="Thank you for Registering. Please login with your details")
 
 
 @app.route("/game")
