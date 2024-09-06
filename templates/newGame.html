@@ -204,8 +204,8 @@
                 <div class="contact-info">
                     <h4>Contact Info</h4>
                     <ul>
-                        <li>Chicago 12, Melborne City, USA</li>
-                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                        <li>London, United Kingdom</li>
+                        <li><a href="tel:+447940542079">+44 7940542079</a></li>
                         <li><a href="mailto:attul@redoctopusinnovation.com">attul@redoctopusinnovation.com</a></li>
                     </ul>
                 </div>
@@ -225,7 +225,7 @@
         <section class="contact-section pt_120 pb_120">
             <div class="auto-container">
                 <div class="sec-title centred mb_70">
-                    <h2>Proposition Evaluation Game</h2>
+                    <h2>GAIM Proposition Evaluation Platform</h2>
                 </div>
                 <div class="form-inner">
                     <form class="default-form" id="generate-proposition-form" name="generate-proposition-form"> 
@@ -243,7 +243,7 @@
                                 <div class="select-box">
                                     <select class="wide" name="productType">
                                        <option data-display="Select Product">Select Product</option>
-                                       <option value="Curent">Curent</option>
+                                       <option value="Current">Current</option>
                                        <option value="Mortgage">Mortgage</option>
                                        <option value="Credit Card">Credit Card</option>
                                        <option value="Crypto">Crypto</option>
@@ -263,7 +263,7 @@
                                 <input type="text" name="productName" required="" placeholder="Please enter your product name">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <div><span>Please select top 3 money needs that you are targeting for your customer</span></div>
+                                <div><span>Please select top 3 money needs that are most important for your target customer</span></div>
                                 <select class="wide form-select needs" name="moneyNeeds" multiple>
                                     {%for need in moneyNeeds%} 
                                     <option value="{{ need }}">{{need}}</option>
@@ -273,7 +273,7 @@
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <div><span>Please select top 3 customer experience needs that you are targeting for your customer</span></div>
+                                <div><span>Please select top 3 customer experience needs that are most important for your target customer</span></div>
                                 <select class="wide form-select needs" name="customerExpNeeds" multiple>
                                     {%for need in customerExpNeeds%} 
                                     <option value="{{ need }}">{{need}}</option>
@@ -283,7 +283,7 @@
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <div><span>Please select top 3 sustainability needs that you are targeting for your customer</span></div>
+                                <div><span>Please select top 3 sustainability needs that are most important for your target customer</span></div>
                                 <select class="wide form-select needs" name="sustainabilityNeeds" multiple>
                                     {%for need in sustainabilityNeeds%} 
                                     <option value="{{ need }}">{{need}}</option>
@@ -292,7 +292,7 @@
                                 
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
-                                <button class="theme-btn btn-one" type="submit" name="generate-proposition" id="generate-proposition">Generate Sample Proposition</button>
+                                <button class="theme-btn btn-one" type="submit" name="generate-proposition" id="generate-proposition">Generate Your Proposition including customer pain points, key market differentiators and reasons to believe</button>
                             </div>
                         </div>
                     </form>
@@ -338,7 +338,7 @@
             </div>
             <div class="footer-bottom centred">
                 <div class="auto-container">
-                    <div class="copyright"><p>Copyright 2024 by <a href="/">Blue AI</a>. All Right Reserved.</p></div>
+                    <div class="copyright"><p>Copyright 2024 by <a href="/">Red Octopus Innovation </a>. All Rights Reserved.</p></div>
                 </div>
             </div>
         </footer>
@@ -420,7 +420,7 @@
                     url: '/submit-proposition',
                     data: $('#generate-proposition-form').serialize()+"&"+$('#submit-proposition-form').serialize(),
                     success: function(data){
-                        topologiesText = '<span>Overall your targeted demographic and proposition are focusing the three topologies below<span><br><ul>'
+                        topologiesText = '<span>Overall your targeted demographic and proposition are focusing on the three topologies below<span><br><ul>'
                         data['matchingTopologies'].forEach(element => {
                             topologiesText = topologiesText + '<li>'+element+'</li>'
                         });   
@@ -429,13 +429,13 @@
                         $('#result').html(topologiesText)
 
                         if(data['subscriberDiff'] < 0) {
-                            $('#subscriberDiff').html('Overall there is not a close match of your proposition to the main demographic. Takeout score difference = '+data['subscriberDiff'])
+                            $('#subscriberDiff').html('Overall there is a small match of your proposition to the main demographic. Takeout score difference = '+data['subscriberDiff'])
                         }
                         else if(data['subscriberDiff'] == 0) {
-                            $('#subscriberDiff').html('Amazing! Your proposition  exactly match the target subscriber take oup for year 3')
+                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 3')
                         }
                         else {
-                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the target subscriber take up for year 3. Additional takeout = '+data['subscriberDiff'])
+                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 3. Additional takeout = '+data['subscriberDiff'])
                             
                         }
                         $('#modal-button').fancybox().trigger('click');
