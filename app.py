@@ -16,6 +16,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/video")
+def video():
+    return render_template("video.html")
+
+
 @app.route("/topologies")
 def topologies():
     return send_from_directory(app.config['LIBRARY_PATH'], 'topologies.csv')
