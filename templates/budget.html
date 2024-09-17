@@ -372,72 +372,43 @@
             <section class="contact-section pt_120 pb_120">
                 <div class="auto-container">
                     <div class="sec-title centred mb_70">
-                        <h2>REGISTER YOUR TEAM</h2>
+                        <h2>MANAGE YOUR BUDGET</h2>
                     </div>
                     <div class="form-inner">
                         <form
                             method="post"
-                            action="/register"
-                            id="register-form"
+                            action="/budget"
+                            id="budget-form"
                             class="default-form"
                         >
                             <div class="row clearfix">
-                                <div
-                                    class="col-lg-6 col-md-6 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="text"
-                                        id="teamName"
-                                        name="teamName"
-                                        placeholder="Your Team Name"
-                                        required=""
-                                    />
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="number" name="csBudget" min="0" required="" placeholder="Customer Service Budget">
                                 </div>
-                                <div
-                                    class="col-lg-6 col-md-6 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Your email"
-                                        required=""
-                                    />
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="number" name="itBudget" min="0" required="" placeholder="I.T. Budget">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="number" name="marketingBudget" min="0" required="" placeholder="Marketing Budget">
                                 </div>
 
-                                <div
-                                    class="col-lg-6 col-md-6 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="text"
-                                        id="username"
-                                        name="username"
-                                        placeholder="User name"
-                                        required=""
-                                    />
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="number" name="salesBudget" min="0" required="" placeholder="Sales Budget">
                                 </div>
-                                <div
-                                    class="col-lg-6 col-md-6 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        required=""
-                                    />
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="number" name="opsBudget" min="0" required="" placeholder="OPS Budget">
                                 </div>
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred"
-                                >
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
                                     <button
                                         class="theme-btn btn-one"
                                         type="submit"
-                                        name="submit-form"
-                                    >
-                                        Register
+                                        name="submit-form">
+                                        Submit
                                     </button>
                                 </div>
+                                
                             </div>
                         </form>
                     </div>

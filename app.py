@@ -15,6 +15,16 @@ app.config['LIBRARY_PATH'] = os.path.abspath(
 def index():
     return render_template("index.html")
 
+@app.route("/budget")
+def budget():
+    return render_template("budget.html")
+
+@app.route("/banks/<bankName>")
+def banks(bankName):
+    bankPath = os.path.abspath(os.path.join(os.getcwd(), 'library', 'banks'))
+    bankFullName = request.view_args['bankName']+"_Bank.pdf"
+    return send_from_directory(bankPath, bankFullName)
+
 
 @app.route("/video")
 def video():
