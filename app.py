@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
-from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition
+from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
 from scripts.db_util import insert_user, fetch_user, UserNotFoundError
 import datetime
 import os
@@ -46,6 +46,7 @@ def logout():
     session.pop('userName', None)
     session.pop('teamName', None)
     session.pop('emailAddress', None)
+    session.pop('bank', None)
     return redirect('/login')
 
 
@@ -65,6 +66,7 @@ def login():
         session.pop('userName', None)
         session.pop('teamName', None)
         session.pop('emailAddress', None)
+        session.pop('bank', None)
         return render_template('login.html')
     else:
         userName = request.form['username']
@@ -74,7 +76,8 @@ def login():
             session['userName'] = user['user_name']
             session['teamName'] = user['team_name']
             session['emailAddress'] = user['email_address']
-            return render_template("index.html")
+            session['bank'] = user['bank']
+            return redirect('/')
 
         except UserNotFoundError:
             return render_template(
@@ -91,7 +94,8 @@ def register():
         teamName = request.form['teamName']
         emailAddress = request.form['email']
         password = request.form['password']
-        insert_user(userName, teamName, emailAddress, password)
+        randomBank = get_random_bank()
+        insert_user(userName, teamName, emailAddress, password, randomBank)
         return render_template(
             "login.html",
             msg="Thank you for Registering. Please login with your details")
@@ -99,6 +103,9 @@ def register():
 
 @app.route("/game")
 def startGame():
+    if 'userName' not in session:
+        return redirect('/login')
+    
     moneyNeeds, _ = listNeeds('money_needs')
     customerExpNeeds, _ = listNeeds('customer_exp')
     sustainabilityNeeds, _ = listNeeds('sustainability')

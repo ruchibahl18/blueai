@@ -7,7 +7,8 @@ def create_user_table():
                 user_name TEXT NOT NULL, 
                 team_name TEXT NOT NULL, 
                 password TEXT NOT NULL, 
-                email_address TEXT NOT NULL
+                email_address TEXT NOT NULL,
+                bank TEXT NOT NULL
         );"""
     ]
 
@@ -51,7 +52,7 @@ def view_all_users():
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
-#create_user_table()
+create_user_table()
 #insert_user('ruchibonkers', 'ruchibonkers', 'ruchibonkers', 'ruchibonkers@gmail.com')
 #view_all_users()
 #create_user_table()

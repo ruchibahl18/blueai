@@ -128,6 +128,10 @@
                                 <a href="mailto:{{session['userName']}}">{{session['userName']}}</a>
                             </li>
                             <li>
+                                <i class="icon-9"></i>
+                                <a href="/banks/{{session['bank']}}">{{session['bank']}} Bank</a>
+                            </li>
+                            <li>
                                 <i class="icon-20"></i>
                                 <a href="/logout">Logout</a>
                             </li>
@@ -281,10 +285,10 @@
         <section class="contact-section pt_120 pb_120">
             <div class="auto-container">
                 <div class="sec-title centred mb_70">
-                    <h2>MANAGE YOUR BUDGET</h2>
+                    <h2>MANAGE YOUR BUDGET for {{session['bank']}} Bank</h2>
                 </div>
                 <div class="form-inner">
-                    <form method="post" action="/budget" id="budget-form" class="default-form">
+                    <form method="post" action="#" id="budget-form" class="default-form">
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="number" name="csBudget" min="0" required=""

@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv, dotenv_values 
 import pandas as pd
 import math
+import random
 
 load_dotenv()
 
@@ -16,10 +17,17 @@ demographicsDict ={
                 'population': 20000}
 }
 
+banks = ['Culture', 'Fortune', 'Tornado']
+
 GOOGLE_API_KEY= os.getenv('GEMINI_API_KEY')
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(model_name = "gemini-pro")
 DB_LOCATION = 'data.sqlite'
+
+
+def get_random_bank():
+    return random.choice(banks)
+   
 
 def load_json_from_string(json_string):
     try:

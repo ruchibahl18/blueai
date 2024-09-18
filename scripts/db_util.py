@@ -44,16 +44,16 @@ def fetchTopologies():
     topologiesDf = pd.read_csv(topologiesPath,  encoding = "ISO-8859-1")
     return topologiesDf
 
-def insert_user(user_name, team_name, password, email_address):
+def insert_user(user_name, team_name, email_address, password, bank):
     dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR,USER_DB))
     print(dbPath)
     try:
         with sqlite3.connect(dbPath) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO users (user_name, team_name, password, email_address) 
-                VALUES (?, ?, ?, ?)
-            """, (user_name, team_name, password, email_address))
+                INSERT INTO users (user_name, team_name, password, email_address, bank) 
+                VALUES (?, ?, ?, ?, ?)
+            """, (user_name, team_name, password, email_address, bank))
             conn.commit()
             print("User inserted successfully.")
     except sqlite3.Error as e:
@@ -66,7 +66,7 @@ def fetch_user(user_name, password):
         with sqlite3.connect(dbPath) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT user_id, user_name, team_name, email_address 
+                SELECT user_id, user_name, team_name, email_address, bank 
                 FROM users 
                 WHERE user_name = ? AND password = ?
             """, (user_name, password))
@@ -77,7 +77,8 @@ def fetch_user(user_name, password):
                     "user_id": user[0],
                     "user_name": user[1],
                     "team_name": user[2],
-                    "email_address": user[3]
+                    "email_address": user[3],
+                    "bank": user[4]
                 }
             else:
                 raise UserNotFoundError(f"User with username '{user_name}' not found.")
