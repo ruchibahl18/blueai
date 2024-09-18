@@ -329,22 +329,17 @@
                         </thead>
                         <tbody id="tableBody">
                             <!-- Example Rows -->
-                            <tr>
-                                <td>1</td>
-                                <td>Team Culture</td>
-                                <td>Product X</td>
-                                <td>Software</td>
-                                <td>New York</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Team Tornado</td>
-                                <td>Product Y</td>
-                                <td>Hardware</td>
-                                <td>Los Angeles</td>
-                                <td>3000</td>
-                            </tr>
+                            {%for prp in propositions%}
+                                <tr>
+                                    <td>{{loop.index+1}}</td>
+                                    <td>{{prp['team_name']}}</td>
+                                    <td>{{prp['product_name']}} X</td>
+                                    <td>{{prp['product_type']}}</td>
+                                    <td>{{prp['city']}}</td>
+                                    <td>{{prp['predicted_subscriber_take_out']}}</td>
+                                </tr>
+                            {%endfor%}
+
                             <!-- Additional rows will go here -->
                         </tbody>
                     </table>

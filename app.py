@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
-from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults
+from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase
 import datetime
 import os
 
@@ -14,6 +14,14 @@ app.config['LIBRARY_PATH'] = os.path.abspath(
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/leaderboard")
+def leaderboard():
+    db = PropositionDatabase()
+    propositions = db.fetch_propositions()
+    print(propositions)
+    return render_template("leaderboard.html", propositions=propositions)
 
 @app.route("/budget")
 def budget():
