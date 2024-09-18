@@ -144,6 +144,7 @@ def submitProposition():
     subcount2 = request.form['subcount2']
     subcount3 = request.form['subcount3']
     productName = request.form['productName']
+    revenume = request.form['revenue']
 
     moneyNeeds = request.form.getlist('moneyNeeds')
     customerExpNeeds = request.form.getlist('customerExpNeeds')
