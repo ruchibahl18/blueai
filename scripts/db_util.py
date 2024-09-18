@@ -86,6 +86,19 @@ def fetch_user(user_name, password):
         print(f"An error occurred: {e}")
 
 
+def savePropositionResults(userId, bank, city, productType, subcount1, subcount2, subcount3, productName, revenue, moneyNeeds, customerExpNeeds, sustainabilityNeeds, matchingTopologies, predictedSubscriberTakeOut):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR,USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO proposition (user_id, bank, city, product_type, subcount1, subcount2, subcount3, product_name, revenue, money_needs, customer_exp_needs, sustainability_needs, matching_topologies, predicted_subscriber_take_out, timestamp) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            """, (userId, bank, city, productType, subcount1, subcount2, subcount3, productName, revenue, moneyNeeds, customerExpNeeds, sustainabilityNeeds, matchingTopologies, predictedSubscriberTakeOut))
+            conn.commit()
+            print("Proposition inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
 
 #user = fetch_user('ruchibonkers', 'ruchibonkers')                 
 #print(user)   

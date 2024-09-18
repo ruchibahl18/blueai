@@ -1,5 +1,39 @@
 import sqlite3
 
+def create_proposition_table():
+    sql_statements = [
+        """CREATE TABLE IF NOT EXISTS proposition (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            bank TEXT NOT NULL,
+            city TEXT NOT NULL,
+            product_type TEXT NOT NULL,
+            subcount1 INTEGER,
+            subcount2 INTEGER,
+            subcount3 INTEGER,
+            product_name TEXT NOT NULL,
+            revenue TEXT,
+            money_needs TEXT,
+            customer_exp_needs TEXT,
+            sustainability_needs TEXT,
+            matching_topologies TEXT,
+            predicted_subscriber_take_out INTEGER,
+            timestamp TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+        """
+    ]
+
+    # create a database connection
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            for statement in sql_statements:
+                cursor.execute(statement)
+            
+            conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
 def create_user_table():
     sql_statements = [
         """CREATE TABLE IF NOT EXISTS users (
@@ -52,7 +86,8 @@ def view_all_users():
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
-create_user_table()
+#create_user_table()
+#create_proposition_table()
 #insert_user('ruchibonkers', 'ruchibonkers', 'ruchibonkers', 'ruchibonkers@gmail.com')
 #view_all_users()
 #create_user_table()

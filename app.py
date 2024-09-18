@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
-from scripts.db_util import insert_user, fetch_user, UserNotFoundError
+from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults
 import datetime
 import os
 
@@ -43,6 +43,7 @@ def demographics():
 
 @app.route("/logout")
 def logout():
+    session.pop('userId', None)
     session.pop('userName', None)
     session.pop('teamName', None)
     session.pop('emailAddress', None)
@@ -63,6 +64,7 @@ def contact():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
+        session.pop('userId', None)
         session.pop('userName', None)
         session.pop('teamName', None)
         session.pop('emailAddress', None)
@@ -73,6 +75,7 @@ def login():
         password = request.form['password']
         try:
             user = fetch_user(userName, password)
+            session['userId'] = user['user_id']
             session['userName'] = user['user_name']
             session['teamName'] = user['team_name']
             session['emailAddress'] = user['email_address']
@@ -137,6 +140,9 @@ def generateProposition():
 @app.route("/submit-proposition", methods=['POST'])
 def submitProposition():
     print("Proposition submitted")
+    if 'userId' not in session:
+        return {}
+    
     city = request.form['city']
 
     productType = request.form['productType']
@@ -144,7 +150,7 @@ def submitProposition():
     subcount2 = request.form['subcount2']
     subcount3 = request.form['subcount3']
     productName = request.form['productName']
-    revenume = request.form['revenue']
+    revenue = request.form['revenue']
 
     moneyNeeds = request.form.getlist('moneyNeeds')
     customerExpNeeds = request.form.getlist('customerExpNeeds')
@@ -155,10 +161,13 @@ def submitProposition():
         city, productType, proposition, moneyNeeds, customerExpNeeds,
         sustainabilityNeeds)
 
+    #print(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), matchingTopologies, predictedSubscriberTakeOut)
+    savePropositionResults(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), ",".join(matchingTopologies), predictedSubscriberTakeOut)
     return {
         'matchingTopologies': matchingTopologies,
         'predictedSubscriberTakeOut': predictedSubscriberTakeOut,
-        'subscriberDiff': predictedSubscriberTakeOut - int(subcount3)
+        'subscriberDiff': predictedSubscriberTakeOut - int(subcount3),
+        'revenue': revenue * predictedSubscriberTakeOut
     }
 
 
