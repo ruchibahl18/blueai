@@ -204,10 +204,12 @@
                                     </ul>
                                 </div>
                             </nav>
-                            <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
-                            </div>
+                            {% if not session['userName'] %}
+                                <div class="menu-right-content ml_70">
+                                    <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                    <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

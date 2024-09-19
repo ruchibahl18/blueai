@@ -3,8 +3,8 @@ import os
 import pandas as pd
 
 DB_DIR = "db"
-
 USER_DB = 'user.db'
+REPORTS_DIR = 'reports'
 
 class UserNotFoundError(Exception):
     """Custom exception when a user is not found in the database."""
@@ -24,7 +24,7 @@ class PropositionDatabase:
             with self._get_connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
-                    SELECT user_id, bank, product_name, predicted_subscriber_take_out, 
+                    SELECT id, user_id, bank, product_name, predicted_subscriber_take_out, 
                            revenue, (predicted_subscriber_take_out * CAST(revenue AS REAL)) as full_revenue, product_type, city
                     FROM proposition order by full_revenue desc
                 """)
@@ -32,15 +32,16 @@ class PropositionDatabase:
                 propositions = []
                 for row in cursor.fetchall():
                     print(row[0])
-                    user = fetch_user_by_id(str(row[0]))
+                    user = fetch_user_by_id(str(row[1]))
                     propositions.append({
-                        "user_id": row[0],
-                        "product_name": row[1],
-                        "predicted_subscriber_take_out": row[2],
-                        "revenue": row[3],
-                        "full_revenue": row[4],
-                        "product_type": row[5],
-                        "city": row[6],
+                        "proposition_id": row[0],
+                        "user_id": row[1],
+                        "product_name": row[2],
+                        "predicted_subscriber_take_out": row[3],
+                        "revenue": row[4],
+                        "full_revenue": row[5],
+                        "product_type": row[6],
+                        "city": row[7],
                         "team_name": user['team_name'] if user else ''
                     })
                 
@@ -156,6 +157,7 @@ def fetch_user_by_id(user_id):
 
 def savePropositionResults(userId, bank, city, productType, subcount1, subcount2, subcount3, productName, revenue, moneyNeeds, customerExpNeeds, sustainabilityNeeds, matchingTopologies, predictedSubscriberTakeOut):
     dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR,USER_DB))
+    
     try:
         with sqlite3.connect(dbPath) as conn:
             cursor = conn.cursor()
@@ -164,7 +166,22 @@ def savePropositionResults(userId, bank, city, productType, subcount1, subcount2
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
             """, (userId, bank, city, productType, subcount1, subcount2, subcount3, productName, revenue, moneyNeeds, customerExpNeeds, sustainabilityNeeds, matchingTopologies, predictedSubscriberTakeOut))
             conn.commit()
+            propositionId = cursor.lastrowid
             print("Proposition inserted successfully.")
+
+            output = {'key':
+            ['Bank','City', 'Product Type', 'Subscriber count for Year 1', 'Subscriber count for Year 2', 'Subscriber count for Year 3',
+            'Product Name', 'Revenue per subscriber', ' Money Needs', 'Customer Needs', 'Sustainability Needs', 'Topologies you are targeting',
+            'Predicted Subscriber Count', 'Total Revenue'], 'value': [
+                bank, city, productType, subcount1, subcount2, subcount3, productName, revenue, moneyNeeds, customerExpNeeds, sustainabilityNeeds, matchingTopologies, predictedSubscriberTakeOut, (int(predictedSubscriberTakeOut)*int(revenue))
+            ]}
+        
+            print(output)
+            df = pd.DataFrame(output)
+            reportsPath = os.path.abspath(os.path.join(os.getcwd(), REPORTS_DIR, 'Proposition_{}.csv'.format(propositionId)))
+            df.to_csv(reportsPath, index=False)
+            return propositionId
+
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
@@ -180,6 +197,6 @@ def savePropositionResults(userId, bank, city, productType, subcount1, subcount2
 #fetch_db_rows_as_dicts(dbPath, 'topologies')
 
 
-db = PropositionDatabase()
-p = db.fetch_propositions()
-print(p)
+#db = PropositionDatabase()
+#p = db.fetch_propositions()
+#print(p)

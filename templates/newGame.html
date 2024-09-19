@@ -212,9 +212,8 @@
                             <nav class="main-menu clearfix">
                                 <!--Keep This Empty / Menu will come through Javascript-->
                             </nav>
-                            <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                            <div class="menu-right-content ml_70"></div>
+                                <a href="/game" class="theme-btn btn-two mr_20">Start New Game</a>
                             </div>
                         </div>
                     </div>
@@ -406,9 +405,13 @@
                 <p class="inner-box mb_45" id="subscriberDiff">
                 </p>
                 <div class="menu-right-content ml_70">
+                    <a id='downloadProposition' target="_blank" href="#" class="theme-btn">Download Your report</a>
+                </div>  
+                <div class="menu-right-content ml_70">
                     <a href="/game" class="theme-btn btn-two mr_20">Submit proposition for next product</a>
-                </div>
+                </div>                  
             </div>
+
         </div>
         <button id="modal-button" data-fancybox data-src="#dialog-content" hidden>Launch Dialog</button>
 
@@ -483,15 +486,16 @@
                         $('#result').html(topologiesText)
 
                         if (data['subscriberDiff'] < 0) {
-                            $('#subscriberDiff').html('Overall there is a small match of your proposition to the main demographic. Takeout score difference = ' + data['subscriberDiff'])
+                            $('#subscriberDiff').html('Overall there is a small match of your proposition to the main demographic. Takeout score difference = ' + data['subscriberDiff'] + " Total revenue = "+data['revenue'])
                         }
                         else if (data['subscriberDiff'] == 0) {
-                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 3')
+                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 3'+ " Total revenue = "+data['revenue'])
                         }
                         else {
-                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 3. Additional takeout = ' + data['subscriberDiff'])
+                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 3. Additional takeout = ' + data['subscriberDiff']+ " Total revenue = "+data['revenue'])
 
                         }
+                        $('#downloadProposition').attr('href', '/report?propsitionId='+data['propositionId']);
                         $('#modal-button').fancybox().trigger('click');
 
 

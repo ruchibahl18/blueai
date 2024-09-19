@@ -3,6 +3,7 @@ from scripts.utils import listNeeds, generatePropositionExample, evaluateProposi
 from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase
 import datetime
 import os
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = 'HrRdpsuJjIiOiPVdpqUk'
@@ -20,7 +21,6 @@ def index():
 def leaderboard():
     db = PropositionDatabase()
     propositions = db.fetch_propositions()
-    print(propositions)
     return render_template("leaderboard.html", propositions=propositions)
 
 @app.route("/budget")
@@ -37,6 +37,12 @@ def banks(bankName):
 @app.route("/video")
 def video():
     return render_template("video.html")
+
+@app.route("/report")
+def report():
+    propsitionId = request.args.get('propsitionId')
+    reportDirPath = os.path.abspath(os.path.join(os.getcwd(), 'reports'))    
+    return send_from_directory(reportDirPath, 'Proposition_{}.csv'.format(propsitionId))
 
 
 @app.route("/topologies")
@@ -170,12 +176,15 @@ def submitProposition():
         sustainabilityNeeds)
 
     #print(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), matchingTopologies, predictedSubscriberTakeOut)
-    savePropositionResults(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), ",".join(matchingTopologies), predictedSubscriberTakeOut)
+    propositionId = savePropositionResults(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), ",".join(matchingTopologies), predictedSubscriberTakeOut)
+
+
     return {
         'matchingTopologies': matchingTopologies,
         'predictedSubscriberTakeOut': predictedSubscriberTakeOut,
         'subscriberDiff': predictedSubscriberTakeOut - int(subcount3),
-        'revenue': revenue * predictedSubscriberTakeOut
+        'revenue': int(revenue) * int(predictedSubscriberTakeOut),
+        'propositionId': propositionId
     }
 
 

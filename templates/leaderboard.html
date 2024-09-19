@@ -200,10 +200,12 @@
                                     </ul>
                                 </div>
                             </nav>
-                            <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
-                            </div>
+                            {% if not session['userName'] %}
+                                <div class="menu-right-content ml_70">
+                                    <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                    <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -324,6 +326,7 @@
                                 <th scope="col">Product Type</th>
                                 <th scope="col">Town</th>
                                 <th scope="col">Subscribers Count</th>
+                                <th scope="col">Download Report</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -336,6 +339,9 @@
                                     <td>{{prp['product_type']}}</td>
                                     <td>{{prp['city']}}</td>
                                     <td>{{prp['predicted_subscriber_take_out']}}</td>
+                                    <td>
+                                        <a target="_blank" href="/report?propsitionId={{prp['proposition_id']}}" class="theme-btn">Download Your report</a>
+                                    </td>
                                 </tr>
                             {%endfor%}
 
