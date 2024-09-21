@@ -27,6 +27,12 @@ def leaderboard():
 def budget():
     return render_template("budget.html")
 
+@app.route("/regulation")
+def regulation():
+    return render_template("regulation.html")
+
+    
+
 @app.route("/banks/<bankName>")
 def banks(bankName):
     bankPath = os.path.abspath(os.path.join(os.getcwd(), 'library', 'banks'))

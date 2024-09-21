@@ -125,74 +125,82 @@
                     </div>
                 </div>
             </div>
-            <!-- header-lower -->
-            <div class="header-lower">
-                <div class="large-container">
-                    <div class="outer-box">
-                        <div class="logo-box">
-                            <div class="shape"></div>
-                            <figure class="logo">
-                                <a href="/"><img src="../static/images/logo.png" alt="" /></a>
-                            </figure>
-                        </div>
-                        <div class="menu-area">
-                            <!--Mobile Navigation Toggler-->
-                            <div class="mobile-nav-toggler">
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                            </div>
-                            <nav class="main-menu navbar-expand-md navbar-light clearfix">
-                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                    <ul class="navigation clearfix">
-                                        <li class="current">
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li><a href="/game">Play</a></li>
-                                        <li>
-                                            <a href="/leaderboard">Leaderboard</a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Data Library</a>
-                                            <ul>
-                                                <li><a href="/topologies">City Topologies</a></li>
-                                                <li><a href="/demographics">Demographics</a></li>
-                                                <li class="dropdown">
-                                                    <a href="/banks/Overview">Banks</a>
-                                                    <ul>
-                                                        <li><a href="/banks/Culture">Culture Bank</a></li>
-                                                        <li><a href="/banks/Fortune">Fortune Bank</a></li>
-                                                        <li><a href="/banks/Tornado">Tornado Bank</a></li>
-                                                    </ul>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Tools</a>
-                                            <ul>
-                                                <li><a href="http://miro.com/" target="_blank">Micro</a></li>
-                                                <li><a href="http://app.powerbi.com/" target="_blank">Power BI</a></li>
-                                                <li><a href="https://lumen5.com/" target="_blank">Lumen5</a></li>
-                                                <li><a href="http://marvelapp.com/" target="_blank">MarvelApp</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <li><a href="/about">About</a></li>
-                                        <li>
-                                            <a href="/contact">Contact</a>
-                                        </li>
-                                    </ul>
+                        <!-- header-lower -->
+                        <div class="header-lower">
+                            <div class="large-container">
+                                <div class="outer-box">
+                                    <div class="logo-box">
+                                        <div class="shape"></div>
+                                        <figure class="logo">
+                                            <a href="/"><img src="../static/images/logo.png" alt="" /></a>
+                                        </figure>
+                                    </div>
+                                    <div class="menu-area">
+                                        <!--Mobile Navigation Toggler-->
+                                        <div class="mobile-nav-toggler">
+                                            <i class="icon-bar"></i>
+                                            <i class="icon-bar"></i>
+                                            <i class="icon-bar"></i>
+                                        </div>
+                                        <nav class="main-menu navbar-expand-md navbar-light clearfix">
+                                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                                <ul class="navigation clearfix">
+                                                    <li class="current">
+                                                        <a href="/">Home</a>
+                                                    </li>
+                                                    <li><a href="/game">Play</a></li>
+                                                    <li class="dropdown">
+                                                        <a href="#">How it works</a>
+                                                        <ul>
+                                                            <li><a href="/video">Play Video</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/leaderboard">Leaderboard</a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#">Data Library</a>
+                                                        <ul>
+                                                            <li><a href="/topologies">City Topologies</a></li>
+                                                            <li><a href="/demographics">Demographics</a></li>
+                                                            <li class="dropdown">
+                                                                <a href="/banks/Overview">Banks</a>
+                                                                <ul>
+                                                                    <li><a href="/banks/Culture">Culture Bank</a></li>
+                                                                    <li><a href="/banks/Fortune">Fortune Bank</a></li>
+                                                                    <li><a href="/banks/Tornado">Tornado Bank</a></li>
+                                                                </ul>
+                                                            </li>
+            
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#">Tools</a>
+                                                        <ul>
+                                                            <li><a href="http://miro.com/" target="_blank">Micro</a></li>
+                                                            <li><a href="http://app.powerbi.com/" target="_blank">Power BI</a></li>
+                                                            <li><a href="https://lumen5.com/" target="_blank">Lumen5</a></li>
+                                                            <li><a href="http://marvelapp.com/" target="_blank">MarvelApp</a></li>
+            
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="/about">About</a></li>
+                                                    <li>
+                                                        <a href="/contact">Contact</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                        <div class="menu-right-content ml_70">
+                                            {% if not session['userName'] %}
+                                            <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                            <a href="/register" class="theme-btn btn-one">Register Your Team</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
-                            </nav>
-                            <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
             <!--sticky Header-->
             <div class="sticky-header">

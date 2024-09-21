@@ -33,7 +33,6 @@
     <link href="../static/css/module-css/contact.css" rel="stylesheet">
     <link href="../static/css/module-css/subscribe.css" rel="stylesheet">
     <link href="../static/css/responsive.css" rel="stylesheet">
-
 </head>
 
 
@@ -42,8 +41,6 @@
 <body>
 
     <div class="boxed_wrapper ltr">
-
-
 
         <!-- preloader -->
         <div class="loader-wrap">
@@ -187,7 +184,13 @@
 
                                             </ul>
                                         </li>
-                                        <li><a href="/budget">Budget Allocation</a></li>
+                                        <li class="dropdown">
+                                            <a href="#">Budget & Regulations</a>
+                                            <ul>
+                                                <li><a href="/budget">Budget Allocation</a></li>
+                                                <li><a href="/regulation">Regulations restrictions</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="/about">About</a></li>
                                         <li><a href="/contact">Contact</a></li>
                                     </ul>
@@ -442,7 +445,6 @@
     <script src="../static/js/isotope.js"></script>
     <script src="../static/js/parallax-scroll.js"></script>
     <script src="../static/js/jQuery.style.switcher.min.js"></script>
-
     <!-- main-js -->
     <script src="../static/js/script.js"></script>
     <script>
@@ -503,15 +505,6 @@
                 })
             })
 
-            /*
-                   <div id="dialog-content" style="display:none;max-width:500px;">
-            <h2>Result</h2>
-            <p id="result">
-            </p>
-            <p id="subscriberDiff">
-            </p>
-          </div> 
-            */
         });
     </script>
 

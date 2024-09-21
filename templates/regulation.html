@@ -140,15 +140,14 @@
                     </div>
                 </div>
             </div>
+           
                         <!-- header-lower -->
                         <div class="header-lower">
                             <div class="large-container">
                                 <div class="outer-box">
                                     <div class="logo-box">
                                         <div class="shape"></div>
-                                        <figure class="logo">
-                                            <a href="/"><img src="../static/images/logo.png" alt="" /></a>
-                                        </figure>
+                                        <figure class="logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></figure>
                                     </div>
                                     <div class="menu-area">
                                         <!--Mobile Navigation Toggler-->
@@ -160,19 +159,10 @@
                                         <nav class="main-menu navbar-expand-md navbar-light clearfix">
                                             <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                                 <ul class="navigation clearfix">
-                                                    <li class="current">
-                                                        <a href="/">Home</a>
+                                                    <li><a href="/">Home</a>
                                                     </li>
                                                     <li><a href="/game">Play</a></li>
-                                                    <li class="dropdown">
-                                                        <a href="#">How it works</a>
-                                                        <ul>
-                                                            <li><a href="/video">Play Video</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/leaderboard">Leaderboard</a>
-                                                    </li>
+                                                    <li><a href="/leaderboard">Leaderboard</a></li>
                                                     <li class="dropdown">
                                                         <a href="#">Data Library</a>
                                                         <ul>
@@ -199,18 +189,20 @@
             
                                                         </ul>
                                                     </li>
-                                                    <li><a href="/about">About</a></li>
-                                                    <li>
-                                                        <a href="/contact">Contact</a>
+                                                    <li class="dropdown">
+                                                        <a href="#">Budget & Regulations</a>
+                                                        <ul>
+                                                            <li><a href="/budget">Budget Allocation</a></li>
+                                                            <li><a href="/regulation">Regulations restrictions</a></li>
+                                                        </ul>
                                                     </li>
+                                                    <li><a href="/about">About</a></li>
+                                                    <li><a href="/contact">Contact</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
                                         <div class="menu-right-content ml_70">
-                                            {% if not session['userName'] %}
-                                            <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                            <a href="/register" class="theme-btn btn-one">Register Your Team</a>
-                                            {% endif %}
+                                            <a href="/game" class="theme-btn btn-two mr_20">Start New Game</a>
                                         </div>
                                     </div>
                                 </div>
@@ -232,8 +224,8 @@
                                 <!--Keep This Empty / Menu will come through Javascript-->
                             </nav>
                             <div class="menu-right-content ml_70">
-                                <a href="login.html" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="register.html" class="theme-btn btn-one">Register Your Team</a>
+                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
+                                <a href="/register" class="theme-btn btn-one">Register Your Team</a>
                             </div>
                         </div>
                     </div>
@@ -257,9 +249,9 @@
                 <div class="contact-info">
                     <h4>Contact Info</h4>
                     <ul>
-                        <li>London, United Kingdom</li>
+                        <li>Chicago 12, Melborne City, USA</li>
                         <li>
-                            <a href="tel:+447940542079">+447940542079</a>
+                            <a href="tel:+8801682648101">+88 01682648101</a>
                         </li>
                         <li>
                             <a href="mailto:attul@redoctopusinnovation.com">attul@redoctopusinnovation.com</a>
@@ -289,126 +281,47 @@
         </div>
         <!-- End Mobile Menu -->
 
-        <!-- page-title -->
-        <section class="page-title centred">
-            <div class="bg-layer" style="
-                        background-image: url(../static/images/background/page-title.jpg);
-                    "></div>
-            <div class="pattern-layer">
-                <div class="pattern-1" style="
-                            background-image: url(../static/images/shape/shape-18.png);
-                        "></div>
-                <div class="pattern-2" style="
-                            background-image: url(../static/images/shape/shape-17.png);
-                        "></div>
-            </div>
-            <div class="auto-container">
-                <div class="content-box">
-                    <h1>Contact Details</h1>
-                    <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
-                        <li>Contact Us</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!-- page-title end -->
-
-        <!-- contact-info-section -->
-        <section class="contact-info-section centred pt_120 pb_90">
-            <div class="auto-container">
-                <div class="sec-title mb_70">
-                    <h6>Contact US</h6>
-                    <h2>Contact Details</h2>
-                </div>
-                <div class="row clearfix">
-                    <div class="col-lg-4 col-md-6 col-sm-12 info-column">
-                        <div class="info-block-one wow fadeInUp animated" data-wow-delay="00ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="icon-box">
-                                    <i class="icon-2"></i>
-                                </div>
-                                <h3>Our Location</h3>
-                                <p>London <br />UK, England</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 info-column">
-                        <div class="info-block-one wow fadeInUp animated" data-wow-delay="300ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="icon-box">
-                                    <i class="icon-43"></i>
-                                </div>
-                                <h3>Email Address</h3>
-                                <p>
-                                    <a href="mailto:attul@redoctopusinnovation.com">attul@redoctopusinnovation.com</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 info-column">
-                        <div class="info-block-one wow fadeInUp animated" data-wow-delay="600ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="icon-box">
-                                    <i class="icon-44"></i>
-                                </div>
-                                <h3>Phone Number</h3>
-                                <p>
-                                    Emergency Cases <br /><a href="tel:9999999999">+(44) 999-9999</a>
-                                    (24/7)
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- contact-info-section end -->
-
-        <!-- google-map-section -->
-        <section class="google-map-section pb_120">
-            <div class="auto-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158857.83988566254!2d-0.2664005785522578!3d51.52873980533456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2sca!4v1725547831926!5m2!1sen!2sca"
-                    width="600" height="535" frameborder="0" style="border: 0; width: 100%" allowfullscreen=""
-                    aria-hidden="false" tabindex="0"></iframe>
-            </div>
-        </section>
-        <!-- google-map-section end -->
-
         <!-- contact-section -->
         <section class="contact-section pt_120 pb_120">
             <div class="auto-container">
                 <div class="sec-title centred mb_70">
-                    <h6>Contact US</h6>
-                    <h2>Contact Details</h2>
+                    <h2>Regulations restrictions for {{session['bank']}} Bank</h2>
                 </div>
                 <div class="form-inner">
-                    <form method="post" action="sendemail.php" id="contact-form" class="default-form">
+                    <form method="post" action="#" id="budget-form" class="default-form">
                         <div class="row clearfix">
-                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="username" placeholder="Your Name" required="" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="email" name="email" placeholder="Your email" required="" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="phone" required="" placeholder="Phone" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="subject" required="" placeholder="Subject" />
-                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <textarea name="message" placeholder="Type message"></textarea>
+                                <div><span>What are the current and upcoming regulations that could impact this market proposition?</span></div>
+                                <textarea name="reg1"></textarea>
                             </div>
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>How do we ensure our proposition meets both local and international regulatory requirements?</span></div>
+                                <textarea name="reg2"></textarea>
+                            </div>
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>What is your strategy for navigating regulatory changes during the lifecycle of this proposition?</span></div>
+                                <textarea name="reg3"></textarea>
+                            </div>
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>What is the company’s risk appetite regarding regulatory non-compliance, and how do we mitigate these risks?</span></div>
+                                <textarea name="reg4"></textarea>
+                            </div>
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <div><span>How can you use regulation as an advantage or differentiator in our market strategy?</span></div>
+                                <textarea name="reg5"></textarea>
+                            </div>
+                            
+
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
                                 <button class="theme-btn btn-one" type="submit" name="submit-form">
-                                    Send Message
+                                    Submit
                                 </button>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -435,9 +348,8 @@
                                     <a href="/"><img src="../static/images/logo-2.png" alt="" /></a>
                                 </figure>
                                 <p>
-                                    Blue AI presents GAIM. The ultimate
-                                    marketing simulation tool to succeed in
-                                    today's world
+                                    Blue AI presents GAIM. The intelligent
+                                    digital marketing simulation tool
                                 </p>
                                 <ul class="social-links">
                                     <li>
@@ -459,8 +371,9 @@
                 <div class="auto-container">
                     <div class="copyright">
                         <p>
-                            Copyright 2024 by <a href="/">Blue AI</a>. All
-                            Right Reserved.
+                            Copyright 2024 by
+                            <a href="/">Red Octopus Innovation</a>. All
+                            Rights Reserved.
                         </p>
                     </div>
                 </div>
