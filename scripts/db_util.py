@@ -120,9 +120,8 @@ def invalidate_budget(bank):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                UPDATE budget set valid_until = datetime('now') where bank = ?
-                VALUES (?)
-            """, (bank))
+                UPDATE budget set valid_until = datetime('now') where bank = '{}'
+            """.format(bank))
             conn.commit()
             print("Budget inserted successfully.")
     except sqlite3.Error as e:
@@ -146,6 +145,35 @@ def save_budget(bank, csBudget, itBudget, marketingBudget, salesBudget,
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
+def invalidate_regulation(bank):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE regulation set valid_until = datetime('now') where bank = '{}'
+            """.format(bank))
+            conn.commit()
+            print("Regulation invalidated successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+def save_regulations(bank, reg1, reg2, reg3, reg4):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO regulation (bank, reg1, reg2, reg3, reg4, valid_until) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (bank, reg1, reg2, reg3, reg4, None))
+            conn.commit()
+            print("Regulation inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
 
 def fetch_user(user_name, password):
     dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))

@@ -262,6 +262,14 @@
                                                         >
                                                     </li>
                                                     <li class="dropdown">
+                                                        <a href="#">Regulations</a>
+                                                        <ul>
+                                                            <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
+                                                            <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
                                                         <a
                                                             href="/banks/Overview"
                                                             >Banks</a
@@ -509,6 +517,14 @@
                                     placeholder="Filter by Subscribers Count"
                                 />
                             </div>
+                            <div class="col-md-2">
+                                <input
+                                    type="text"
+                                    id="filterRevenue"
+                                    class="form-control"
+                                    placeholder="Filter by Revenue"
+                                />
+                            </div>
                         </div>
 
                         <!-- Bootstrap Table -->
@@ -521,6 +537,7 @@
                                     <th scope="col">Product Type</th>
                                     <th scope="col">Town</th>
                                     <th scope="col">Subscribers Count</th>
+                                    <th scope="col">Total Revenue</th>
                                     <th scope="col">Download Report</th>
                                 </tr>
                             </thead>
@@ -535,6 +552,9 @@
                                     <td>{{prp['city']}}</td>
                                     <td>
                                         {{prp['predicted_subscriber_take_out']}}
+                                    </td>
+                                    <td>
+                                        {{prp['predicted_subscriber_take_out'] * 1000}}
                                     </td>
                                     <td>
                                         <a

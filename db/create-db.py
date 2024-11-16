@@ -84,6 +84,29 @@ def create_budget_table():
     except sqlite3.Error as e:
         print(e)
 
+def create_regulation_table():
+    sql_statements = [
+        """CREATE TABLE IF NOT EXISTS regulation (
+                regulations_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                bank TEXT NOT NULL,
+                reg1 TEXT,
+                reg2 TEXT,
+                reg3 TEXT,
+                reg4 TEXT,
+                valid_until DATETIME
+        );"""
+    ]
+
+    # create a database connection
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            for statement in sql_statements:
+                cursor.execute(statement)
+
+            conn.commit()
+    except sqlite3.Error as e:
+        print(e)
 
 def insert_user(user_name, password, email_address):
     try:
@@ -118,9 +141,26 @@ def view_all_users():
         print(f"An error occurred: {e}")
 
 
-create_user_table()
-create_proposition_table()
+def insert_regulation():
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO regulation (bank, reg1, reg2, reg3, reg4, valid_until) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, ('bank1', 'dasdas', 'asdaa', 'sakdjsa', 'adasjdah', None))
+            conn.commit()
+            print("reg inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+#create_user_table()
+#create_proposition_table()
 #insert_user('ruchibonkers', 'ruchibonkers', 'ruchibonkers', 'ruchibonkers@gmail.com')
 #view_all_users()
 #create_user_table()
-create_budget_table()
+#create_budget_table()
+#create_regulation_table()
+insert_regulation()

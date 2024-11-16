@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
-from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase, save_budget, invalidate_budget
+from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase, save_budget, invalidate_budget, invalidate_regulation, save_regulations
 import datetime
 import os
 import pandas as pd
@@ -42,9 +42,23 @@ def budget():
                                msg="Your budget details have been saved")
 
 
-@app.route("/regulation")
+@app.route("/regulation", methods=['POST', 'GET'])
 def regulation():
-    return render_template("regulation.html")
+    if request.method == 'GET':
+        return render_template("regulation.html")
+    else:
+        reg1 = request.form['reg1']
+        reg2 = request.form['reg2']
+        reg3 = request.form['reg3']
+        reg4 = request.form['reg4']
+        bank = session['bank']
+        invalidate_regulation(bank)
+        save_regulations(bank, reg1, reg2, reg3, reg4)
+        return render_template("regulation.html",
+                               msg="Your regulation details have been saved")
+    
+
+
 
 
 @app.route("/banks/<bankName>")
@@ -75,6 +89,10 @@ def topologies():
 @app.route("/demographics")
 def demographics():
     return send_from_directory(app.config['LIBRARY_PATH'], 'demographics.csv')
+
+@app.route("/consumer_duty")
+def consumer_duty():
+    return send_from_directory(app.config['LIBRARY_PATH'], 'regulation/Consumer_Duty_brochure.pdf')
 
 
 @app.route("/logout")

@@ -196,7 +196,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- header-lower -->
                 <div class="header-lower">
                     <div class="large-container">
@@ -246,6 +245,15 @@
                                                             >Demographics</a
                                                         >
                                                     </li>
+                                                    <li class="dropdown">
+                                                        <a href="#">Regulations</a>
+                                                        <ul>
+                                                            <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
+                                                            <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    
                                                     <li class="dropdown">
                                                         <a
                                                             href="/banks/Overview"
@@ -375,7 +383,7 @@
                                     <a
                                         href="/register"
                                         class="theme-btn btn-one"
-                                        >Register Your Team</a
+                                        >Register Your Details</a
                                     >
                                 </div>
                             </div>
@@ -404,114 +412,111 @@
                     </div>
                     <div class="contact-info">
                         <h4>Contact Info</h4>
-                        <ul>
-                           <li>
-                             <li>
+                    </div>
+                    <div class="menu-outer">
+                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                    </div>
+                    <div class="contact-info">
+                        <h4>Contact Info</h4>
+
+                       <li>
                                 <a href="mailto:attul@redoctopusinnovation.com"
                                     >attul@redoctopusinnovation.com</a
                                 >
                             </li>
                         </ul>
                     </div>
-                    <div class="social-links">
-   </div>
+                      </li>
+                            <li>
+                                <a href="mailto:attul@redoctopusinnovation.com"
+                                    >attul@redoctopusinnovation.com</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </nav>
+            </div>
             <!-- End Mobile Menu -->
 
             <!-- contact-section -->
             <section class="contact-section pt_120 pb_120">
                 <div class="auto-container">
+                    {% if msg %}
+                    <div class="centred mb_70 login_successful">
+                        <h6>{{msg}}</h6>
+                    </div>
+                    {% endif %}
+                    
                     <div class="sec-title centred mb_70">
-                        <h2>
-                            Apply Understanding of Regulations restrictions for {{session['bank']}}
-                            Bank
-                        </h2>
+                        <h2>Apply Understanding of Regulations restrictions for {{session['bank']}}
+                            Bank</h2>
                     </div>
                     <div class="form-inner">
                         <form
-                            method="post"
-                            action="#"
-                            id="budget-form"
-                            class="default-form"
-                        >
-                            <div class="row clearfix">
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <div>
-                                        <span
-                                            >What are the current and upcoming
-                                            regulations that could impact this
-                                            market proposition?</span
-                                        >
-                                    </div>
-                                    <textarea name="reg1"></textarea>
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <div>
-                                        <span
-                                            >How do we ensure our proposition
-                                            meets both local and international
-                                            regulatory requirements?</span
-                                        >
-                                    </div>
-                                    <textarea name="reg2"></textarea>
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <div>
-                                        <span
-                                            >What provisions to you make in your processes for high risk customers?</span
-                                        >
-                                    </div>
-                                    <textarea name="reg3"></textarea>
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <div>
-                                        <span
-                                            >How do you ensure the right
-                                            customers are using your product in
-                                            today's regulatory market? What are
-                                            the best practices for
-                                            doing so? How do you mitigate                          against any risks?</span
-                                        >
-                                    </div>
-                                    <textarea name="reg4"></textarea>
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <div>
-                                        <span
-                                            >How can you use current regulation
-                                            as an advantage or differentiator in
-                                            our market strategy?</span
-                                        >
-                                    </div>
-                                    <textarea name="reg5"></textarea>
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred"
-                                >
-                                    <button
-                                        class="theme-btn btn-one"
-                                        type="submit"
-                                        name="submit-form"
+                        method="post"
+                        action="/regulation"
+                        id="regulation-form"
+                        class="default-form"
+                    >
+                        <div class="row clearfix">
+                            <div
+                                class="col-lg-12 col-md-12 col-sm-12 form-group"
+                            >
+                                <div>
+                                    <span
+                                        >How does the firm monitor and ensure that its products and services genuinely meet the needs of its target consumers?</span
                                     >
-                                        Submit
-                                    </button>
                                 </div>
+                                <textarea name="reg1"></textarea>
                             </div>
-                        </form>
+
+                            <div
+                                class="col-lg-12 col-md-12 col-sm-12 form-group"
+                            >
+                                <div>
+                                    <span
+                                        >What governance structures, like Board-level oversight, are in place to review and approve Consumer Duty-related assessments annually?</span
+                                    >
+                                </div>
+                                <textarea name="reg2"></textarea>
+                            </div>
+
+                            <div
+                                class="col-lg-12 col-md-12 col-sm-12 form-group"
+                            >
+                                <div>
+                                    <span
+                                        >Are product and service communications clear, fair, and not misleading?</span
+                                    >
+                                </div>
+                                <textarea name="reg3"></textarea>
+                            </div>
+
+                            <div
+                                class="col-lg-12 col-md-12 col-sm-12 form-group"
+                            >
+                                <div>
+                                    <span
+                                        >Does the firm actively monitor, respond to, and learn from complaints?</span
+                                    >
+                                </div>
+                                <textarea name="reg4"></textarea>
+                            </div>
+
+                            <div
+                                class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred"
+                            >
+                                <button
+                                    class="theme-btn btn-one"
+                                    type="submit"
+                                    name="submit-form"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </section>
@@ -551,25 +556,6 @@
                                         Blue AI presents GAIM. The intelligent
                                         digital marketing simulation tool
                                     </p>
-                                    <ul class="social-links">
-                                        <li>
-                                            <a href="/"
-                                                ><i
-                                                    class="fab fa-facebook-f"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                        <li>
-                                            <a href="/"
-                                                ><i class="fab fa-twitter"></i
-                                            ></a>
-                                        </li>
-                                        <li>
-                                            <a href="/"
-                                                ><i class="fab fa-instagram"></i
-                                            ></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
