@@ -177,7 +177,7 @@
                                         <li class="dropdown">
                                             <a href="#">Tools</a>
                                             <ul>
-                                                <li><a href="http://miro.com/" target="_blank">Micro</a></li>
+                                                <li><a href="http://miro.com/" target="_blank">Miro</a></li>
                                                 <li><a href="http://app.powerbi.com/" target="_blank">Power BI</a></li>
                                                 <li><a href="https://lumen5.com/" target="_blank">Lumen5</a></li>
                                                 <li><a href="http://marvelapp.com/" target="_blank">MarvelApp</a></li>
@@ -188,7 +188,7 @@
                                             <a href="#">Budget & Regulations</a>
                                             <ul>
                                                 <li><a href="/budget">Budget Allocation</a></li>
-                                                <li><a href="/regulation">Regulations restrictions</a></li>
+                                                <li><a href="/regulation">Regulatory Questions</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="/about">About</a></li>
@@ -280,7 +280,6 @@
                                         <option value="Current">Current</option>
                                         <option value="Mortgage">Mortgage</option>
                                         <option value="Credit Card">Credit Card</option>
-                                        <option value="Crypto">Crypto</option>
                                     </select>
                                 </div>
                             </div>
@@ -290,19 +289,15 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="number" name="subcount2" min="0" required=""
-                                    placeholder="Please enter your subscriber take up target for year 2">
+                             i       placeholder="Please enter your subscriber take up target for year 3">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="number" name="subcount3" min="0" required=""
-                                    placeholder="Please enter your subscriber take up target for year 3">
+                                    placeholder="Please enter your subscriber take up target for year 10">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="text" name="productName" required=""
                                     placeholder="Please enter your product name">
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <input type="number" name="revenue" min="0" required=""
-                                    placeholder="Please enter your revenue per subscriber">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <div><span>Please select top 3 money needs that are most important for your target
@@ -338,7 +333,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
                                 <button class="theme-btn btn-one" type="submit" name="generate-proposition"
-                                    id="generate-proposition">Refine Your Proposition Here (include any further customer
+                                    id="generate-proposition">Here is your proposition. Refine it Here (include any further customer
                                     pain points, specific market differentiators and customer reasons to
                                     believe</button>
                             </div>
@@ -479,7 +474,7 @@
                     url: '/submit-proposition',
                     data: $('#generate-proposition-form').serialize() + "&" + $('#submit-proposition-form').serialize(),
                     success: function (data) {
-                        topologiesText = '<span>Overall your targeted demographic and proposition are focusing on the three topologies below<span><br><ul>'
+                        topologiesText = '<span>Overall your targeted proposition is focusing on the three segments below<span><br><ul>'
                         data['matchingTopologies'].forEach(element => {
                             topologiesText = topologiesText + '<li>' + element + '</li>'
                         });
@@ -488,13 +483,13 @@
                         $('#result').html(topologiesText)
 
                         if (data['subscriberDiff'] < 0) {
-                            $('#subscriberDiff').html('Overall there is a small match of your proposition to the main demographic. Takeout score difference = ' + data['subscriberDiff'] + " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Overallthere is a small match of your proposition to the target demographic. Score difference = ' + data['subscriberDiff'] + " Total revenue = "+data['revenue'])
                         }
                         else if (data['subscriberDiff'] == 0) {
-                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 3'+ " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 10'+ " Total revenue = "+data['revenue'])
                         }
                         else {
-                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 3. Additional takeout = ' + data['subscriberDiff']+ " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 10. Additional takeout = ' + data['subscriberDiff']+ " Total revenue = "+data['revenue'])
 
                         }
                         $('#downloadProposition').attr('href', '/report?propsitionId='+data['propositionId']);

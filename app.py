@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
-from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase
+from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase, save_budget, invalidate_budget
 import datetime
 import os
 import pandas as pd
@@ -23,20 +23,34 @@ def leaderboard():
     propositions = db.fetch_propositions()
     return render_template("leaderboard.html", propositions=propositions)
 
-@app.route("/budget")
+
+@app.route("/budget", methods=['POST', 'GET'])
 def budget():
-    return render_template("budget.html")
+    if request.method == 'GET':
+        return render_template("budget.html")
+    else:
+        csBudget = request.form['csBudget']
+        itBudget = request.form['itBudget']
+        marketingBudget = request.form['marketingBudget']
+        salesBudget = request.form['salesBudget']
+        opsBudget = request.form['opsBudget']
+        bank = session['bank']
+        invalidate_budget(bank)
+        save_budget(bank, csBudget, itBudget, marketingBudget, salesBudget,
+                    opsBudget)
+        return render_template("budget.html",
+                               msg="Your budget details have been saved")
+
 
 @app.route("/regulation")
 def regulation():
     return render_template("regulation.html")
 
-    
 
 @app.route("/banks/<bankName>")
 def banks(bankName):
     bankPath = os.path.abspath(os.path.join(os.getcwd(), 'library', 'banks'))
-    bankFullName = request.view_args['bankName']+"_Bank.pdf"
+    bankFullName = request.view_args['bankName'] + "_Bank.pdf"
     return send_from_directory(bankPath, bankFullName)
 
 
@@ -44,11 +58,13 @@ def banks(bankName):
 def video():
     return render_template("video.html")
 
+
 @app.route("/report")
 def report():
     propsitionId = request.args.get('propsitionId')
-    reportDirPath = os.path.abspath(os.path.join(os.getcwd(), 'reports'))    
-    return send_from_directory(reportDirPath, 'Proposition_{}.csv'.format(propsitionId))
+    reportDirPath = os.path.abspath(os.path.join(os.getcwd(), 'reports'))
+    return send_from_directory(reportDirPath,
+                               'Proposition_{}.csv'.format(propsitionId))
 
 
 @app.route("/topologies")
@@ -97,7 +113,6 @@ def login():
             user = fetch_user(userName, password)
             session['userId'] = user['user_id']
             session['userName'] = user['user_name']
-            session['teamName'] = user['team_name']
             session['emailAddress'] = user['email_address']
             session['bank'] = user['bank']
             return redirect('/')
@@ -114,11 +129,10 @@ def register():
         return render_template("register.html")
     else:
         userName = request.form['username']
-        teamName = request.form['teamName']
         emailAddress = request.form['email']
         password = request.form['password']
         randomBank = get_random_bank()
-        insert_user(userName, teamName, emailAddress, password, randomBank)
+        insert_user(userName, emailAddress, password, randomBank)
         return render_template(
             "login.html",
             msg="Thank you for Registering. Please login with your details")
@@ -128,7 +142,7 @@ def register():
 def startGame():
     if 'userName' not in session:
         return redirect('/login')
-    
+
     moneyNeeds, _ = listNeeds('money_needs')
     customerExpNeeds, _ = listNeeds('customer_exp')
     sustainabilityNeeds, _ = listNeeds('sustainability')
@@ -162,7 +176,7 @@ def submitProposition():
     print("Proposition submitted")
     if 'userId' not in session:
         return {}
-    
+
     city = request.form['city']
 
     productType = request.form['productType']
@@ -170,7 +184,7 @@ def submitProposition():
     subcount2 = request.form['subcount2']
     subcount3 = request.form['subcount3']
     productName = request.form['productName']
-    revenue = request.form['revenue']
+    revenue = 1000
 
     moneyNeeds = request.form.getlist('moneyNeeds')
     customerExpNeeds = request.form.getlist('customerExpNeeds')
@@ -182,8 +196,11 @@ def submitProposition():
         sustainabilityNeeds)
 
     #print(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), matchingTopologies, predictedSubscriberTakeOut)
-    propositionId = savePropositionResults(session['userId'], session['bank'], city, productType, subcount1, subcount2, subcount3, productName, revenue, ",".join(moneyNeeds), ",".join(customerExpNeeds), ",".join(sustainabilityNeeds), ",".join(matchingTopologies), predictedSubscriberTakeOut)
-
+    propositionId = savePropositionResults(
+        session['userId'], session['bank'], city, productType, subcount1,
+        subcount2, subcount3, productName, revenue, ",".join(moneyNeeds),
+        ",".join(customerExpNeeds), ",".join(sustainabilityNeeds),
+        ",".join(matchingTopologies), predictedSubscriberTakeOut)
 
     return {
         'matchingTopologies': matchingTopologies,

@@ -38,26 +38,15 @@ class PropositionDatabase:
                     print(row[0])
                     user = fetch_user_by_id(str(row[1]))
                     propositions.append({
-                        "proposition_id":
-                        row[0],
-                        "user_id":
-                        row[1],
-                        "bank":
-                        row[2],
-                        "product_name":
-                        row[3],
-                        "predicted_subscriber_take_out":
-                        row[4],
-                        "revenue":
-                        row[5],
-                        "full_revenue":
-                        row[6],
-                        "product_type":
-                        row[7],
-                        "city":
-                        row[8],
-                        "team_name":
-                        user['team_name'] if user else ''
+                        "proposition_id": row[0],
+                        "user_id": row[1],
+                        "bank": row[2],
+                        "product_name": row[3],
+                        "predicted_subscriber_take_out": row[4],
+                        "revenue": row[5],
+                        "full_revenue": row[6],
+                        "product_type": row[7],
+                        "city": row[8]
                     })
 
                 if not propositions:
@@ -107,7 +96,7 @@ def fetchTopologies():
     return topologiesDf
 
 
-def insert_user(user_name, team_name, email_address, password, bank):
+def insert_user(user_name, email_address, password, bank):
     dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
     print(dbPath)
     try:
@@ -115,11 +104,45 @@ def insert_user(user_name, team_name, email_address, password, bank):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                INSERT INTO users (user_name, team_name, password, email_address, bank) 
-                VALUES (?, ?, ?, ?, ?)
-            """, (user_name, team_name, password, email_address, bank))
+                INSERT INTO users (user_name, password, email_address, bank) 
+                VALUES (?, ?, ?, ?)
+            """, (user_name, password, email_address, bank))
             conn.commit()
             print("User inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+def invalidate_budget(bank):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE budget set valid_until = datetime('now') where bank = ?
+                VALUES (?)
+            """, (bank))
+            conn.commit()
+            print("Budget inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+def save_budget(bank, csBudget, itBudget, marketingBudget, salesBudget,
+                opsBudget):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO budget (bank, csBudget, itBudget, marketingBudget, salesBudget, opsBudget, valid_until) 
+                VALUES (?, ?, ?, ?, ?)
+            """, (bank, csBudget, itBudget, marketingBudget, salesBudget,
+                  opsBudget, None))
+            conn.commit()
+            print("Budget inserted successfully.")
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
@@ -132,7 +155,7 @@ def fetch_user(user_name, password):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                SELECT user_id, user_name, team_name, email_address, bank 
+                SELECT user_id, user_name, email_address, bank 
                 FROM users 
                 WHERE user_name = ? AND password = ?
             """, (user_name, password))
@@ -142,9 +165,8 @@ def fetch_user(user_name, password):
                 return {
                     "user_id": user[0],
                     "user_name": user[1],
-                    "team_name": user[2],
-                    "email_address": user[3],
-                    "bank": user[4]
+                    "email_address": user[2],
+                    "bank": user[3]
                 }
             else:
                 raise UserNotFoundError(
@@ -161,7 +183,7 @@ def fetch_user_by_id(user_id):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                SELECT user_id, user_name, team_name, email_address, bank 
+                SELECT user_id, user_name, email_address, bank 
                 FROM users 
                 WHERE user_id = ?
             """, (user_id))
@@ -171,9 +193,8 @@ def fetch_user_by_id(user_id):
                 return {
                     "user_id": user[0],
                     "user_name": user[1],
-                    "team_name": user[2],
-                    "email_address": user[3],
-                    "bank": user[4]
+                    "email_address": user[2],
+                    "bank": user[3]
                 }
             else:
                 raise UserNotFoundError(
