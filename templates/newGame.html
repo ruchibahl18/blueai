@@ -481,22 +481,47 @@
                     url: '/submit-proposition',
                     data: $('#generate-proposition-form').serialize() + "&" + $('#submit-proposition-form').serialize(),
                     success: function (data) {
-                        topologiesText = '<span>Overall your targeted proposition is spread over the segments <span><br><ul>'
+                        topologiesText = '<ul>'
                         data['matchingTopologies'].forEach(element => {
                             topologiesText = topologiesText + '<li>' + element + '</li>'
                         });
                         topologiesText = topologiesText + '</ul>'
-                        topologiesText = topologiesText + '<br> For your proposition the total predicted subscriber take up is ' + data['predictedSubscriberTakeOut']
                         $('#result').html(topologiesText)
 
                         if (data['subscriberDiff'] < 0) {
-                            $('#subscriberDiff').html('Overall there is a small alignment of your proposition to the prime demographic. The take up difference is ' + data['subscriberDiff'])
+                            
+
+                            $('#subscriberDiff').html(
+                                `<span>Your targeted proposition spans multiple customer segments<span><br>` + topologiesText +`<br> These do not strongly align with the primary demographic. For more details on these segments, please refer to the topology descriptions.
+
+                                <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
+
+                                However, there is only minimal alignment with the primary demographic, resulting in a projected shortfall of` + data['subscriberDiff'] +`  subscribers by Year 10.
+
+                                <br>We recommend revisiting your proposition and reassessing how it addresses the needs of the primary demographic</br>`
+                            )
                         }
                         else if (data['subscriberDiff'] == 0) {
-                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 10')
+                            $('#subscriberDiff').html(
+                                `<span>Your targeted proposition spans multiple customer segments<span><br>` + topologiesText +`<br> These definiley align with the primary demographic. For more details on these segments, please refer to the topology descriptions.
+
+                                <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
+
+                                There is a definite alignment with primary demographic
+
+                                <br>Given that if you want to go further your goals then we recommend revisiting your proposition and reassessing how it addresses the needs of the primary demographic</br>`
+                            )
                         }
                         else {
-                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 10. Your take up will be overall = ' + data['subscriberDiff'])
+                            $('#subscriberDiff').html(
+                                `<span>Your targeted proposition spans multiple customer segments<span><br>` + topologiesText +`<br> These strongly align with the primary demographic. For more details on these segments, please refer to the topology descriptions.
+
+                                <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
+
+                                There is only strong alignment with the primary demographic, resulting in a projected increase of` + data['subscriberDiff'] +`  subscribers by Year 10.
+
+                                <br>We recommend minimal changes to your proposition for best results in your primary demographic</br>`
+                            )
 
                         }
                         $('#downloadProposition').attr('href', '/report?propsitionId='+data['propositionId']);
