@@ -108,6 +108,54 @@ def create_regulation_table():
     except sqlite3.Error as e:
         print(e)
 
+
+def create_revenue_table():
+
+    sql_statements = [
+        """DROP table IF EXISTS revenue""",
+        """CREATE TABLE IF NOT EXISTS revenue (
+                revenue_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                product TEXT NOT NULL,
+                revenue INTEGER,
+                valid_until DATETIME
+        );"""
+    ]
+
+    # create a database connection
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            for statement in sql_statements:
+                cursor.execute(statement)
+
+            conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+
+def create_penalties_table():
+    
+    sql_statements = [
+        """DROP table IF EXISTS penalty""",
+        """CREATE TABLE IF NOT EXISTS penalty (
+                penalty_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                bank TEXT NOT NULL,
+                penalty INTEGER,
+                valid_until DATETIME
+        );"""
+    ]
+
+    # create a database connection
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            for statement in sql_statements:
+                cursor.execute(statement)
+
+            conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
 def insert_user(user_name, password, email_address):
     try:
         with sqlite3.connect('user.db') as conn:
@@ -156,6 +204,21 @@ def insert_regulation():
         print(f"An error occurred: {e}")
 
 
+def delete_regulation():
+    try:
+        with sqlite3.connect('user.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                delete from regulation where regulations_id=3
+            """)
+            conn.commit()
+            print("reg inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")        
+
+
+
 #create_user_table()
 #create_proposition_table()
 #insert_user('ruchibonkers', 'ruchibonkers', 'ruchibonkers', 'ruchibonkers@gmail.com')
@@ -163,4 +226,7 @@ def insert_regulation():
 #create_user_table()
 #create_budget_table()
 #create_regulation_table()
-insert_regulation()
+#insert_regulation()
+#delete_regulation()
+#create_revenue_table()
+create_penalties_table()

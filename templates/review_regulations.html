@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -182,12 +182,6 @@
                                     >
                                 </li>
                                 <li>
-                                    <i class="icon-9"></i>
-                                    <a href="/banks/{{session['bank']}}"
-                                        >{{session['bank']}} Bank</a
-                                    >
-                                </li>
-                                <li>
                                     <i class="icon-20"></i>
                                     <a href="/logout">Logout</a>
                                 </li>
@@ -225,117 +219,17 @@
                                         id="navbarSupportedContent"
                                     >
                                         <ul class="navigation clearfix">
-                                            <li><a href="/">Home</a></li>
-                                            <li><a href="/game">Play</a></li>
+                                            <li class="current">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li><a href="/review_budget">Review Budgets</a></li>
+                                            <li><a href="/review_regulations">Review Regulations</a></li>
+                                            <li><a href="/manage_revenue">Manage Revenues</a></li>
                                             <li>
-                                                <a href="/leaderboard"
-                                                    >Leaderboard</a
-                                                >
+                                                <a href="/leaderboard">Leaderboard</a>
                                             </li>
-                                            <li class="dropdown">
-                                                <a href="#">Data Library</a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="/topologies"
-                                                            >City Topologies</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="/demographics"
-                                                            >Demographics</a
-                                                        >
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#">Regulations</a>
-                                                        <ul>
-                                                            <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
-                                                            <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
-                                                            
-                                                        </ul>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a
-                                                            href="/banks/Overview"
-                                                            >Banks</a
-                                                        >
-                                                        <ul>
-                                                            <li>
-                                                                <a
-                                                                    href="/banks/Culture"
-                                                                    >Culture
-                                                                    Bank</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href="/banks/Fortune"
-                                                                    >Fortune
-                                                                    Bank</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href="/banks/Tornado"
-                                                                    >Tornado
-                                                                    Bank</a
-                                                                >
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#">Tools</a>
-                                                <ul>
-                                                    <li>
-                                                        <a
-                                                            href="http://miro.com/"
-                                                            target="_blank"
-                                                            >Miro</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            href="http://app.powerbi.com/"
-                                                            target="_blank"
-                                                            >Power BI</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            href="https://lumen5.com/"
-                                                            target="_blank"
-                                                            >Lumen5</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            href="http://marvelapp.com/"
-                                                            target="_blank"
-                                                            >MarvelApp</a
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#"
-                                                    >Budget & Regulations</a
-                                                >
-                                                <ul>
-                                                    <li>
-                                                        <a href="/budget"
-                                                            >Budget
-                                                            Allocation</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="/regulation"
-                                                            >Regulations
-                                                            restrictions</a
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </li>
+    
+    
                                             <li><a href="/about">About</a></li>
                                             <li>
                                                 <a href="/contact">Contact</a>
@@ -344,11 +238,18 @@
                                     </div>
                                 </nav>
                                 <div class="menu-right-content ml_70">
+                                    {% if not session['userName'] %}
                                     <a
-                                        href="/game"
+                                        href="/login"
                                         class="theme-btn btn-two mr_20"
-                                        >Start New Game</a
+                                        >Login</a
                                     >
+                                    <a
+                                        href="/register"
+                                        class="theme-btn btn-one"
+                                        >Register Your Email Address</a
+                                    >
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -375,14 +276,14 @@
                                 </nav>
                                 <div class="menu-right-content ml_70">
                                     <a
-                                        href="/login"
+                                        href="login.html"
                                         class="theme-btn btn-two mr_20"
                                         >Login</a
                                     >
                                     <a
-                                        href="/register"
+                                        href="register.html"
                                         class="theme-btn btn-one"
-                                        >Register Your Details</a
+                                        >Register Your Team</a
                                     >
                                 </div>
                             </div>
@@ -411,25 +312,44 @@
                     </div>
                     <div class="contact-info">
                         <h4>Contact Info</h4>
-                    </div>
-                    <div class="menu-outer">
-                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                    </div>
-                    <div class="contact-info">
-                        <h4>Contact Info</h4>
-
-                       <li>
+                        <ul>
+                            <li>London, United Kingdom</li>
+                            <li>
+                                <a href="tel:+447940542079">+447940542079</a>
+                            </li>
+                            <li>
                                 <a href="mailto:attul@redoctopusinnovation.com"
                                     >attul@redoctopusinnovation.com</a
                                 >
                             </li>
                         </ul>
                     </div>
-                      </li>
+                    <div class="social-links">
+                        <ul class="clearfix">
                             <li>
-                                <a href="mailto:attul@redoctopusinnovation.com"
-                                    >attul@redoctopusinnovation.com</a
-                                >
+                                <a href="/"
+                                    ><span class="fab fa-twitter"></span
+                                ></a>
+                            </li>
+                            <li>
+                                <a href="/"
+                                    ><span class="fab fa-facebook-square"></span
+                                ></a>
+                            </li>
+                            <li>
+                                <a href="/"
+                                    ><span class="fab fa-pinterest-p"></span
+                                ></a>
+                            </li>
+                            <li>
+                                <a href="/"
+                                    ><span class="fab fa-instagram"></span
+                                ></a>
+                            </li>
+                            <li>
+                                <a href="/"
+                                    ><span class="fab fa-youtube"></span
+                                ></a>
                             </li>
                         </ul>
                     </div>
@@ -445,89 +365,37 @@
                         <h6>{{msg}}</h6>
                     </div>
                     {% endif %}
-                    
                     <div class="sec-title centred mb_70">
-                        <h2>MANAGE YOUR £12M BUDGET for {{session['bank']}} Bank</h2>
+                        <h2>Review Regulations (Consumer Duty)</h2>
                     </div>
                     <div class="form-inner">
-                        <form
-                            method="post"
-                            action="/budget"
-                            id="budget-form"
-                            class="default-form"
-                        >
-                            <div class="row clearfix">
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="number"
-                                        name="csBudget"
-                                        min="0"
-                                        required=""
-                                        placeholder="Customer Service Budget"
-                                    />
-                                </div>
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="number"
-                                        name="itBudget"
-                                        min="0"
-                                        required=""
-                                        placeholder="I.T. Budget"
-                                    />
-                                </div>
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="number"
-                                        name="marketingBudget"
-                                        min="0"
-                                        required=""
-                                        placeholder="Legal & Regulatory Budget"
-                                    />
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="number"
-                                        name="salesBudget"
-                                        min="0"
-                                        required=""
-                                        placeholder="Sales & Marketing Budget"
-                                    />
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                >
-                                    <input
-                                        type="number"
-                                        name="opsBudget"
-                                        min="0"
-                                        required=""
-                                        placeholder="OPS Budget"
-                                    />
-                                </div>
-
-                                <div
-                                    class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred"
-                                >
-                                    <button
-                                        class="theme-btn btn-one"
-                                        type="submit"
-                                        name="submit-form"
-                                    >
-                                        Submit
-                                    </button>
-                                </div>
+                        {%for regulation in regulations%}
+                            <div class="sec-title centred mb_70">
+                                <h4>{{regulation['bank']}} Bank</h2>
                             </div>
-                        </form>
+
+                            <div class="sec-title centred mb_70">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td>{{mapping['reg1']}}</td>
+                                            <td>{{mapping['reg2']}}</td>
+                                            <td>{{mapping['reg3']}}</td>
+                                            <td>{{mapping['reg4']}}</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+                                        <tr>
+                                            <td>{{regulation['reg1']}}</td>
+                                            <td>{{regulation['reg2']}}</td>
+                                            <td>{{regulation['reg3']}}</td>
+                                            <td>{{regulation['reg4']}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        {%endfor%}
                     </div>
                 </div>
             </section>
@@ -564,10 +432,29 @@
                                         /></a>
                                     </figure>
                                     <p>
-                                        Blue AI presents GAIM. The intelligent
-                                        digital marketing simulation tool
+                                        Blue AI presents GAIM. The ultimate
+                                        marketing simulation tool to succeed in
+                                        today's world
                                     </p>
-                                    
+                                    <ul class="social-links">
+                                        <li>
+                                            <a href="/"
+                                                ><i
+                                                    class="fab fa-facebook-f"
+                                                ></i
+                                            ></a>
+                                        </li>
+                                        <li>
+                                            <a href="/"
+                                                ><i class="fab fa-twitter"></i
+                                            ></a>
+                                        </li>
+                                        <li>
+                                            <a href="/"
+                                                ><i class="fab fa-instagram"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -577,9 +464,8 @@
                     <div class="auto-container">
                         <div class="copyright">
                             <p>
-                                Copyright 2024 by
-                                <a href="/">Red Octopus Innovation</a>. All
-                                Rights Reserved.
+                                Copyright 2024 by <a href="/">Blue AI</a>. All
+                                Right Reserved.
                             </p>
                         </div>
                     </div>

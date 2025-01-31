@@ -58,7 +58,7 @@ class PropositionDatabase:
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return None
-
+        
 
 def fetch_db_rows_as_dicts(db_path, table_name):
     conn = None
@@ -137,7 +137,7 @@ def save_budget(bank, csBudget, itBudget, marketingBudget, salesBudget,
             cursor.execute(
                 """
                 INSERT INTO budget (bank, csBudget, itBudget, marketingBudget, salesBudget, opsBudget, valid_until) 
-                VALUES (?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (bank, csBudget, itBudget, marketingBudget, salesBudget,
                   opsBudget, None))
             conn.commit()
@@ -282,6 +282,120 @@ def savePropositionResults(userId, bank, city, productType, subcount1,
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
 
+
+def view_active_budgets():
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT bank, csBudget, itBudget, marketingBudget, salesBudget, opsBudget
+                FROM budget
+                WHERE valid_until is null
+            """)
+
+            budgets = []
+            for row in cursor.fetchall():
+                budgets.append({
+                    "bank": row[0],
+                    "csBudget": row[1],
+                    "itBudget": row[2],
+                    "marketingBudget": row[3],
+                    "salesBudget": row[4],
+                    "opsBudget": row[5]
+                })
+            print(budgets)
+            return budgets
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+def view_active_regulations():
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT bank, reg1, reg2, reg3, reg4
+                FROM regulation
+                WHERE valid_until is null
+            """)
+
+            regulations = []
+            for row in cursor.fetchall():
+                regulations.append({
+                    "bank": row[0],
+                    "reg1": row[1],
+                    "reg2": row[2],
+                    "reg3": row[3],
+                    "reg4": row[4]
+                })
+            print(regulations)
+            return regulations
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+
+def invalidate_revenue(product):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE revenue set valid_until = datetime('now') where product = '{}'
+            """.format(product))
+            conn.commit()
+            print("revenue invalidated successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+        
+def save_revenue(product, revenue):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO revenue (product, revenue, valid_until) 
+                VALUES (?, ?, ?)
+            """, (product, revenue, None))
+            conn.commit()
+            print("Revenue inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+
+
+
+def invalidate_penalties():
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE penalty set valid_until = datetime('now')""")
+            conn.commit()
+            print("Penalties invalidated successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+        
+def save_penalty(bank, penalty):
+    dbPath = os.path.abspath(os.path.join(os.getcwd(), DB_DIR, USER_DB))
+    try:
+        with sqlite3.connect(dbPath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO penalty (bank, penalty, valid_until) 
+                VALUES (?, ?, ?)
+            """, (bank, penalty, None))
+            conn.commit()
+            print("penalty inserted successfully.")
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
 
 #user = fetch_user('ruchibonkers', 'ruchibonkers')
 #print(user)

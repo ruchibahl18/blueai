@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory
 from scripts.utils import listNeeds, generatePropositionExample, evaluateProposition, get_random_bank
-from scripts.db_util import insert_user, fetch_user, UserNotFoundError, savePropositionResults, PropositionDatabase, save_budget, invalidate_budget, invalidate_regulation, save_regulations
+from scripts.db_util import *
 import datetime
 import os
 import pandas as pd
@@ -11,10 +11,58 @@ app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=60)
 app.config['LIBRARY_PATH'] = os.path.abspath(
     os.path.join(os.getcwd(), 'library'))
 
+regulation_dict = {'reg1': 'How does the firm monitor and ensure that its products and services genuinely meet the needs of its target consumers?',
+                   'reg2': 'What governance structures, like Board-level oversight, are in place to review and approve Consumer Duty-related assessments annually?',
+                   'reg3': 'Are product and service communications clear, fair, and not misleading?',
+                   'reg4': 'Does the firm actively monitor, respond to, and learn from complaints?'}
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+@app.route("/review_budget" , methods=['POST', 'GET'])
+def review_budget():
+    budgets = view_active_budgets()
+
+    return render_template("review_budget.html", budgets=budgets)
+
+@app.route("/review_regulations")
+def review_regulation():
+    regulations = view_active_regulations()
+    return render_template("review_regulations.html", regulations=regulations, mapping=regulation_dict)
+
+@app.route("/manage_revenue", methods=['POST', 'GET'])
+def manage_revenue():
+    if request.method == 'GET':
+        return render_template("manage_revenue.html")
+    else:
+        product = request.form['product']
+        revenue = request.form['revenue']
+        invalidate_revenue(product)
+        save_revenue(product, revenue)
+        return render_template("manage_revenue.html",
+                               msg="Your Revenue details have been saved")
+
+
+@app.route("/manage_penalties", methods=['POST', 'GET'])
+def manage_penalties():
+    if request.method == 'GET':
+        return render_template("manage_penalties.html")
+    else:
+        culture = request.form['Culture']
+        tornado = request.form['Tornado']
+        fortune = request.form['Fortune']
+
+        invalidate_penalties()
+        save_penalty('Culture', culture)
+        save_penalty('Tornado', tornado)
+        save_penalty('Fortune', fortune)
+        return render_template("manage_penalties.html",
+                               msg="Your Penalties details have been saved")
 
 
 @app.route("/leaderboard")
@@ -139,6 +187,32 @@ def login():
             return render_template(
                 "login.html",
                 msg="Username or password is incorrect. Please try again")
+
+@app.route("/login_admin", methods=['POST', 'GET'])
+def login_admin():
+    if request.method == 'GET':
+        session.pop('userId', None)
+        session.pop('userName', None)
+        session.pop('teamName', None)
+        session.pop('emailAddress', None)
+        session.pop('bank', None)
+        return render_template('login_admin.html')
+    else:
+        userName = request.form['username']
+        password = request.form['password']
+        try:
+            user = fetch_user(userName, password)
+            session['userId'] = user['user_id']
+            session['userName'] = user['user_name']
+            session['emailAddress'] = user['email_address']
+            return redirect('/admin')
+
+        except UserNotFoundError:
+            return render_template(
+                "login_admin.html",
+                msg="Username or password is incorrect. Please try again")
+
+
 
 
 @app.route("/register", methods=['POST', 'GET'])

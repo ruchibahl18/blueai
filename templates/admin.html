@@ -136,10 +136,6 @@
                                 <a href="mailto:{{session['userName']}}">{{session['userName']}}</a>
                             </li>
                             <li>
-                                <i class="icon-9"></i>
-                                <a href="/banks/{{session['bank']}}">{{session['bank']}} Bank</a>
-                            </li>
-                            <li>
                                 <i class="icon-20"></i>
                                 <a href="/logout">Logout</a>
                             </li>
@@ -171,55 +167,12 @@
                                         <li class="current">
                                             <a href="/">Home</a>
                                         </li>
-                                        <li><a href="/game">Play</a></li>
-                                        <li class="dropdown">
-                                            <a href="#">How to Play</a>
-                                            <ul>
-                                                <li><a href="/demographics">1. Study City Demographics</a></li>
-                                                <li><a href="/topologies">2. City Topologies</a></li>
-                                                <li><a href="/business">3. Create Business Plan</a></li>
-                                                <li><a href="/subscriber">4. Enter Subscriber Data</a></li>
-                                                <li><a href="/marketing">5. Build Marketing Video</a></li>
-                                                <li><a href="/video">Play this Video</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="/leaderboard">Leaderboard</a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Data Library</a>
-                                            <ul>
-                                                <li><a href="/topologies">City Topologies</a></li>
-                                                <li><a href="/demographics">Demographics</a></li>
-                                                <li class="dropdown">
-                                                    <a href="#">Regulations</a>
-                                                    <ul>
-                                                        <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
-                                                        <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
-                                                        
-                                                    </ul>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="/banks/Overview">Competitor Banks</a>
-                                                    <ul>
-                                                        <li><a href="/banks/Culture">Culture Bank</a></li>
-                                                        <li><a href="/banks/Fortune">Fortune Bank</a></li>
-                                                        <li><a href="/banks/Tornado">Tornado Bank</a></li>
-                                                    </ul>
-                                                </li>
+                                        <li><a href="/review_budget">Review Budgets</a></li>
+                                        <li><a href="/review_regulations">Review Regulations</a></li>
+                                        <li><a href="/manage_revenue">Manage Revenues</a></li>
+                                        <li><a href="/manage_penalties">Manage Penalties</a></li>
 
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Tools</a>
-                                            <ul>
-                                                <li><a href="http://miro.com/" target="_blank">Miro</a></li>
-                                                <li><a href="http://app.powerbi.com/" target="_blank">Power BI</a></li>
-                                                <li><a href="https://lumen5.com/" target="_blank">Lumen5</a></li>
-                                                <li><a href="http://marvelapp.com/" target="_blank">MarvelApp</a></li>
 
-                                            </ul>
-                                        </li>
                                         <li><a href="/about">About</a></li>
                                         <li>
                                             <a href="/contact">Contact</a>
@@ -229,8 +182,7 @@
                             </nav>
                             <div class="menu-right-content ml_70">
                                 {% if not session['userName'] %}
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register</a>
+                                <a href="/login_admin" class="theme-btn btn-two mr_20">Login</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -253,8 +205,7 @@
                                 <!--Keep This Empty / Menu will come through Javascript-->
                             </nav>
                             <div class="menu-right-content ml_70">
-                                <a href="/login" class="theme-btn btn-two mr_20">Login</a>
-                                <a href="/register" class="theme-btn btn-one">Register Your Email</a>
+                                <a href="/login_admin" class="theme-btn btn-two mr_20">Login</a>
                             </div>
                         </div>
                     </div>

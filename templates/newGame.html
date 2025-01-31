@@ -481,22 +481,22 @@
                     url: '/submit-proposition',
                     data: $('#generate-proposition-form').serialize() + "&" + $('#submit-proposition-form').serialize(),
                     success: function (data) {
-                        topologiesText = '<span>Overall your targeted proposition is focusing on the three segments below<span><br><ul>'
+                        topologiesText = '<span>Overall your targeted proposition is spread over the segments <span><br><ul>'
                         data['matchingTopologies'].forEach(element => {
                             topologiesText = topologiesText + '<li>' + element + '</li>'
                         });
                         topologiesText = topologiesText + '</ul>'
-                        topologiesText = topologiesText + '<br> For your proposition the total predicted subscriber take out count is ' + data['predictedSubscriberTakeOut']
+                        topologiesText = topologiesText + '<br> For your proposition the total predicted subscriber take up is ' + data['predictedSubscriberTakeOut']
                         $('#result').html(topologiesText)
 
                         if (data['subscriberDiff'] < 0) {
-                            $('#subscriberDiff').html('Overallthere is a small match of your proposition to the target demographic. Score difference = ' + data['subscriberDiff'] + " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Overall there is a small alignment of your proposition to the prime demographic. The take up difference is ' + data['subscriberDiff'])
                         }
                         else if (data['subscriberDiff'] == 0) {
-                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 10'+ " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Amazing! Your proposition exactly matches the predicted subscriber take up by year 10')
                         }
                         else {
-                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 10. Additional takeout = ' + data['subscriberDiff']+ " Total revenue = "+data['revenue'])
+                            $('#subscriberDiff').html('Great Job! Your proposition exceeds the predicted subscriber take up by year 10. Your take up will be overall = ' + data['subscriberDiff'])
 
                         }
                         $('#downloadProposition').attr('href', '/report?propsitionId='+data['propositionId']);
