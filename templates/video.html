@@ -113,67 +113,6 @@
             </div>
             <!-- preloader end -->
 
-            <!-- page-direction -->
-            <div class="page_direction">
-                <div class="demo-rtl direction_switch">
-                    <button class="rtl">RTL</button>
-                </div>
-                <div class="demo-ltr direction_switch">
-                    <button class="ltr">LTR</button>
-                </div>
-            </div>
-            <!-- page-direction end -->
-
-            <!-- switcher menu -->
-            <div class="switcher">
-                <div class="switch_btn">
-                    <button><i class="fas fa-palette"></i></button>
-                </div>
-                <div class="switch_menu">
-                    <!-- color changer -->
-                    <div class="switcher_container">
-                        <ul id="styleOptions" title="switch styling">
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="theme-color"
-                                    class="theme-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="pink"
-                                    class="pink-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="violet"
-                                    class="violet-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="crimson"
-                                    class="crimson-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="orange"
-                                    class="orange-color"
-                                ></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- end switcher menu -->
-
             <!-- main header -->
             <header class="main-header">
                 <!-- header-top -->
@@ -236,7 +175,6 @@
                                             <li class="current">
                                                 <a href="/">Home</a>
                                             </li>
-                                            <li><a href="/game">Play</a></li>
                                             <li class="dropdown">
                                                 <a href="#">How it works</a>
                                                 <ul>
@@ -247,11 +185,14 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                            {% if session['userName'] %}
+                                            <li><a href="/game">Play</a></li>
                                             <li>
                                                 <a href="/leaderboard"
                                                     >Leaderboard</a
                                                 >
                                             </li>
+                                            {% endif %}
                                             <li class="dropdown">
                                                 <a href="#">Data Library</a>
                                                 <ul>
@@ -266,11 +207,27 @@
                                                         >
                                                     </li>
                                                     <li class="dropdown">
-                                                        <a href="#">Regulations</a>
+                                                        <a href="#"
+                                                            >Regulations</a
+                                                        >
                                                         <ul>
-                                                            <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
-                                                            <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
-                                                            
+                                                            <li>
+                                                                <a
+                                                                    href="/consumer_duty"
+                                                                    target="_blank"
+                                                                    >Consumer
+                                                                    Duty</a
+                                                                >
+                                                            </li>
+                                                            <li>
+                                                                <a
+                                                                    href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty"
+                                                                    target="_blank"
+                                                                    >FCA
+                                                                    Consumer
+                                                                    Duty</a
+                                                                >
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li class="dropdown">
@@ -556,7 +513,8 @@
                     <div class="auto-container">
                         <div class="copyright">
                             <p>
-                                Copyright 2024 by <a href="/">Red Octopus Innovation</a>. All
+                                Copyright 2024 by
+                                <a href="/">Red Octopus Innovation</a>. All
                                 Rights Reserved.
                             </p>
                         </div>

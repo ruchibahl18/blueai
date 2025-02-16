@@ -75,44 +75,6 @@
         </div>
         <!-- preloader end -->
 
-
-        <!-- page-direction -->
-        <div class="page_direction">
-            <div class="demo-rtl direction_switch"><button class="rtl">RTL</button></div>
-            <div class="demo-ltr direction_switch"><button class="ltr">LTR</button></div>
-        </div>
-        <!-- page-direction end -->
-
-
-        <!-- switcher menu -->
-        <div class="switcher">
-            <div class="switch_btn">
-                <button><i class="fas fa-palette"></i></button>
-            </div>
-            <div class="switch_menu">
-                <!-- color changer -->
-                <div class="switcher_container">
-                    <ul id="styleOptions" title="switch styling">
-                        <li>
-                            <a href="javascript: void(0)" data-theme="theme-color" class="theme-color"></a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0)" data-theme="pink" class="pink-color"></a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0)" data-theme="violet" class="violet-color"></a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0)" data-theme="crimson" class="crimson-color"></a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0)" data-theme="orange" class="orange-color"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- end switcher menu -->
         <!-- main header -->
         <header class="main-header">
             <!-- header-top -->
@@ -287,6 +249,7 @@
                                         <option data-display="Select Product">Select Product</option>
                                         <option value="Current">Current</option>
                                         <option value="Credit Card">Credit Card</option>
+                                        <option value="Crypto">Crypto</option>
                                     </select>
                                 </div>
                             </div>
@@ -300,7 +263,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="number" name="subcount3" min="0" required=""
-                                    placeholder="Please enter your subscriber take up target for year 10">
+                                    placeholder="Please enter your subscriber take up target for year 5">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                 <input type="text" name="productName" required=""
@@ -496,7 +459,7 @@
 
                                 <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
 
-                                However, there is only minimal alignment with the primary demographic, resulting in a projected shortfall of` + data['subscriberDiff'] +`  subscribers by Year 10.
+                                However, there is only minimal alignment with the primary demographic, resulting in a projected shortfall of` + data['subscriberDiff'] +`  subscribers by Year 5.
 
                                 <br>We recommend revisiting your proposition and reassessing how it addresses the needs of the primary demographic</br>`
                             )
@@ -507,7 +470,7 @@
 
                                 <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
 
-                                There is a definite alignment with primary demographic
+                                There is a strong alignment with the primary demographic for the city
 
                                 <br>Given that if you want to go further your goals then we recommend revisiting your proposition and reassessing how it addresses the needs of the primary demographic</br>`
                             )
@@ -518,7 +481,7 @@
 
                                 <br>Our analysis predicts a subscriber uptake of `+data['predictedSubscriberTakeOut'] +` users by Year 3 under the current proposition.</br>
 
-                                There is only strong alignment with the primary demographic, resulting in a projected increase of` + data['subscriberDiff'] +`  subscribers by Year 10.
+                                There is only strong alignment with the primary demographic, resulting in a projected increase of` + data['subscriberDiff'] +`  subscribers by Year 5.
 
                                 <br>We recommend minimal changes to your proposition for best results in your primary demographic</br>`
                             )

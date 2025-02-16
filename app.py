@@ -11,29 +11,42 @@ app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=60)
 app.config['LIBRARY_PATH'] = os.path.abspath(
     os.path.join(os.getcwd(), 'library'))
 
-regulation_dict = {'reg1': 'How does the firm monitor and ensure that its products and services genuinely meet the needs of its target consumers?',
-                   'reg2': 'What governance structures, like Board-level oversight, are in place to review and approve Consumer Duty-related assessments annually?',
-                   'reg3': 'Are product and service communications clear, fair, and not misleading?',
-                   'reg4': 'Does the firm actively monitor, respond to, and learn from complaints?'}
+regulation_dict = {
+    'reg1':
+    'How does the firm monitor and ensure that its products and services genuinely meet the needs of its target consumers?',
+    'reg2':
+    'What governance structures, like Board-level oversight, are in place to review and approve Consumer Duty-related assessments annually?',
+    'reg3':
+    'Are product and service communications clear, fair, and not misleading?',
+    'reg4':
+    'Does the firm actively monitor, respond to, and learn from complaints?'
+}
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
 
-@app.route("/review_budget" , methods=['POST', 'GET'])
+
+@app.route("/review_budget", methods=['POST', 'GET'])
 def review_budget():
     budgets = view_active_budgets()
 
     return render_template("review_budget.html", budgets=budgets)
 
+
 @app.route("/review_regulations")
 def review_regulation():
     regulations = view_active_regulations()
-    return render_template("review_regulations.html", regulations=regulations, mapping=regulation_dict)
+    return render_template("review_regulations.html",
+                           regulations=regulations,
+                           mapping=regulation_dict)
+
 
 @app.route("/manage_revenue", methods=['POST', 'GET'])
 def manage_revenue():
@@ -104,9 +117,6 @@ def regulation():
         save_regulations(bank, reg1, reg2, reg3, reg4)
         return render_template("regulation.html",
                                msg="Your regulation details have been saved")
-    
-
-
 
 
 @app.route("/banks/<bankName>")
@@ -138,9 +148,11 @@ def topologies():
 def demographics():
     return send_from_directory(app.config['LIBRARY_PATH'], 'demographics.csv')
 
+
 @app.route("/consumer_duty")
 def consumer_duty():
-    return send_from_directory(app.config['LIBRARY_PATH'], 'regulation/Consumer_Duty_brochure.pdf')
+    return send_from_directory(app.config['LIBRARY_PATH'],
+                               'regulation/Consumer_Duty_brochure.pdf')
 
 
 @app.route("/logout")
@@ -188,6 +200,7 @@ def login():
                 "login.html",
                 msg="Username or password is incorrect. Please try again")
 
+
 @app.route("/login_admin", methods=['POST', 'GET'])
 def login_admin():
     if request.method == 'GET':
@@ -210,9 +223,8 @@ def login_admin():
         except UserNotFoundError:
             return render_template(
                 "login_admin.html",
-                msg="Username or password is incorrect. Please try again")
-
-
+                msg="Username or password is incorrect. Please try again later"
+            )
 
 
 @app.route("/register", methods=['POST', 'GET'])

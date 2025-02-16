@@ -105,67 +105,6 @@
             </div>
             <!-- preloader end -->
 
-            <!-- page-direction -->
-            <div class="page_direction">
-                <div class="demo-rtl direction_switch">
-                    <button class="rtl">RTL</button>
-                </div>
-                <div class="demo-ltr direction_switch">
-                    <button class="ltr">LTR</button>
-                </div>
-            </div>
-            <!-- page-direction end -->
-
-            <!-- switcher menu -->
-            <div class="switcher">
-                <div class="switch_btn">
-                    <button><i class="fas fa-palette"></i></button>
-                </div>
-                <div class="switch_menu">
-                    <!-- color changer -->
-                    <div class="switcher_container">
-                        <ul id="styleOptions" title="switch styling">
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="theme-color"
-                                    class="theme-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="pink"
-                                    class="pink-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="violet"
-                                    class="violet-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="crimson"
-                                    class="crimson-color"
-                                ></a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript: void(0)"
-                                    data-theme="orange"
-                                    class="orange-color"
-                                ></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- end switcher menu -->
-
             <!-- main header -->
             <header class="main-header">
                 <!-- header-top -->
@@ -228,7 +167,6 @@
                                             <li class="current">
                                                 <a href="/">Home</a>
                                             </li>
-                                            <li><a href="/game">Play</a></li>
                                             <li class="dropdown">
                                                 <a href="#">How it works</a>
                                                 <ul>
@@ -239,11 +177,15 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                            {% if session['userName'] %}
+                                            <li><a href="/game">Play</a></li>
                                             <li>
                                                 <a href="/leaderboard"
                                                     >Leaderboard</a
                                                 >
                                             </li>
+                                            {% endif %}
+
                                             <li class="dropdown">
                                                 <a href="#">Data Library</a>
                                                 <ul>
@@ -258,11 +200,27 @@
                                                         >
                                                     </li>
                                                     <li class="dropdown">
-                                                        <a href="#">Regulations</a>
+                                                        <a href="#"
+                                                            >Regulations</a
+                                                        >
                                                         <ul>
-                                                            <li><a href="/consumer_duty" target="_blank">Consumer Duty</a></li>
-                                                            <li><a  href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty" target="_blank">FCA Consumer Duty</a></li>
-                                                            
+                                                            <li>
+                                                                <a
+                                                                    href="/consumer_duty"
+                                                                    target="_blank"
+                                                                    >Consumer
+                                                                    Duty</a
+                                                                >
+                                                            </li>
+                                                            <li>
+                                                                <a
+                                                                    href="https://www.fca.org.uk/publications/multi-firm-reviews/payments-consumer-duty"
+                                                                    target="_blank"
+                                                                    >FCA
+                                                                    Consumer
+                                                                    Duty</a
+                                                                >
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li class="dropdown">
@@ -382,7 +340,7 @@
                                     <a
                                         href="register.html"
                                         class="theme-btn btn-one"
-                                        >Register Your Team</a
+                                        >Register</a
                                     >
                                 </div>
                             </div>
@@ -494,7 +452,7 @@
             <section class="contact-info-section centred pt_120 pb_90">
                 <div class="auto-container">
                     <div class="sec-title mb_70">
-                        <h6>Contact US</h6>
+                        <h6>Contact Us</h6>
                         <h2>Contact Details</h2>
                     </div>
                     <div class="row clearfix">
@@ -546,8 +504,8 @@
                                     <h3>Phone Number</h3>
                                     <p>
                                         Emergency Cases <br /><a
-                                            href="tel:9999999999"
-                                            >+(44) 999-9999</a
+                                            href="tel: 44 7940542079"
+                                            >+(44) 7940542079</a
                                         >
                                         (24/7)
                                     </p>
@@ -688,9 +646,9 @@
                                         /></a>
                                     </figure>
                                     <p>
-                                        Blue AI presents GAIM. The ultimate
-                                        marketing simulation tool to succeed in
-                                        today's world
+                                        Blue AI presents GAIM Simulator. The
+                                        ultimate marketing simulation tool to
+                                        succeed in today's world
                                     </p>
                                     <ul class="social-links">
                                         <li>
