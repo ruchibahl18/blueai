@@ -265,7 +265,7 @@ def generateProposition():
 
 @app.route("/submit-proposition", methods=['POST'])
 def submitProposition():
-    print("Proposition submitted")
+    print("Proposition submitted2")
     if 'userId' not in session:
         return {}
 
@@ -278,10 +278,12 @@ def submitProposition():
     productName = request.form['productName']
     revenue = 1000
 
+    print("hello2")
     moneyNeeds = request.form.getlist('moneyNeeds')
     customerExpNeeds = request.form.getlist('customerExpNeeds')
     sustainabilityNeeds = request.form.getlist('sustainabilityNeeds')
     proposition = request.form['proposition']
+    print("hello")
 
     matchingTopologies, predictedSubscriberTakeOut = evaluateProposition(
         city, productType, proposition, moneyNeeds, customerExpNeeds,

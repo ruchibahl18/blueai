@@ -6,6 +6,7 @@ from dotenv import load_dotenv, dotenv_values
 import pandas as pd
 import math
 import random
+from groq import Groq
 
 load_dotenv()
 
@@ -24,9 +25,13 @@ demographicsDict = {
 
 banks = ['Culture', 'Fortune', 'Tornado']
 
-GOOGLE_API_KEY = os.getenv('GEMINI_API_KEY')
-genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(model_name="gemini-1.5-pro")
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+MODEL = 'llama-3.3-70b-versatile'
+
+model = Groq(api_key=GROQ_API_KEY)
+
+# genai.configure(api_key=GOOGLE_API_KEY)
+# model = genai.GenerativeModel(model_name="gemini-1.5-pro")
 DB_LOCATION = 'data.sqlite'
 
 
@@ -167,8 +172,21 @@ def findTop3Needs(proposition, needs):
 
     needsPrompt = prompt.format(needsString, proposition)
     print(needsPrompt)
-    response = model.generate_content([needsPrompt])
-    output = response.text
+    #response = model.generate_content([needsPrompt])
+
+    response = model.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": needsPrompt,
+            }
+        ],
+        temperature=0.9,
+        stream=False,
+        model=MODEL
+    )
+
+    output = response.choices[0].message.content
     output = output.replace('```json', '')
     output = output.replace('```', '')
     obj = load_json_from_string(output)
@@ -218,8 +236,20 @@ def findTop3Topologies(proposition, demographic):
     topologyPrompt = prompt.format(", ".join(topologyNames),
                                    str(topologyDetails), proposition,
                                    demographic)
-    response = model.generate_content([topologyPrompt])
-    output = response.text
+    response = model.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": topologyPrompt,
+            }    
+        ],
+        temperature=0.9,
+        stream=False,
+        model=MODEL
+    )
+
+    output = response.choices[0].message.content
+    
     output = output.replace('```json', '')
     output = output.replace('```', '')
     obj = load_json_from_string(output)
@@ -245,8 +275,24 @@ def generatePropositionExample(productName, selectedProduct, moneyNeeds,
     '''
     proposal = proposal.format(productName, selectedProduct, moneyNeeds,
                                customerExperience, sutainabilityNeeds)
-    response = model.generate_content([proposal])
-    return response.text
+    #response = model.generate_content([proposal])
+
+    response = model.chat.completions.create(
+        
+        messages=[
+            {
+                "role": "user",
+                "content": proposal,
+            }
+        ],
+        temperature=0.9,
+        stream=False,
+        model=MODEL
+    )
+
+    output = response.choices[0].message.content
+    
+    return output
 
 
 def evaluateProposition(selectedCity, selectedProduct, userProposal,
