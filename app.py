@@ -295,12 +295,11 @@ def submitProposition():
         subcount2, subcount3, productName, revenue, ",".join(moneyNeeds),
         ",".join(customerExpNeeds), ",".join(sustainabilityNeeds),
         ",".join(matchingTopologies), predictedSubscriberTakeOut)
-
+    
     return {
         'matchingTopologies': matchingTopologies,
         'predictedSubscriberTakeOut': predictedSubscriberTakeOut,
         'subscriberDiff': predictedSubscriberTakeOut - int(subcount3),
-        'revenue': int(revenue) * int(predictedSubscriberTakeOut),
         'propositionId': propositionId
     }
 
