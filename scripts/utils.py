@@ -1,4 +1,4 @@
-from scripts.db_util import fetch_db_rows_as_dicts, fetchTopologies
+from scripts.db_util import fetch_db_rows_as_dicts, fetchTopologies, fetchCityPopulationCounts
 import google.generativeai as genai
 import json
 import os
@@ -7,6 +7,7 @@ import pandas as pd
 import math
 import random
 from groq import Groq
+import re
 
 load_dotenv()
 
@@ -24,6 +25,8 @@ demographicsDict = {
 }
 
 banks = ['Culture', 'Fortune', 'Tornado']
+
+TOPOLOGY = "Topology"
 
 GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 MODEL = 'llama-3.3-70b-versatile'
@@ -294,10 +297,25 @@ def generatePropositionExample(productName, selectedProduct, moneyNeeds,
     
     return output
 
+def getLowerAlphaNumericString(s):
+    clean = re.sub(r'[^a-zA-Z0-9]', '', s)
+    return clean.lower()
+
+
+def findPopulationCounts(selectedCity, selectedProduct, selectedTopologies):
+    counts_df = fetchCityPopulationCounts()
+    cleanSelectedProduct = getLowerAlphaNumericString(selectedProduct)
+    
+    filter_df = counts_df[[TOPOLOGY, f"{selectedCity}_total", f"{selectedCity}_{cleanSelectedProduct}"]]
+    filter_df = filter_df[filter_df[TOPOLOGY].isin(selectedTopologies)]
+    filter_df.rename(columns={f"{selectedCity}_total": 'total', f"{selectedCity}_{cleanSelectedProduct}": selectedProduct}, inplace=True)
+    print(filter_df)
+    return filter_df
 
 def evaluateProposition(selectedCity, selectedProduct, userProposal,
                         moneyNeeds, customerExpNeeds, sustainabilityNeeds):
 
+    print("evaluate started")
     proposal = '''Given proposal is for the city {} with product {}. The propsal is as below.
     {}'''
     proposal = proposal.format(selectedCity, selectedProduct, userProposal)
@@ -312,6 +330,8 @@ def evaluateProposition(selectedCity, selectedProduct, userProposal,
         proposal, demographic)
 
     topologySumDict = {}
+
+    populationCountDf = findPopulationCounts(selectedCity, selectedProduct, matchingTopologies)
 
     for topology in matchingTopologies:
         sumTopology = 0
@@ -331,15 +351,20 @@ def evaluateProposition(selectedCity, selectedProduct, userProposal,
 
         topologySumDict[topology] = math.floor(sumTopology / 3)
 
-    totalSubscriberTakeOut = 0
+        totalSubscriberTakeOut = 0
     for topology in matchingTopologies:
-        proportion = int(
-            topologyDetails[topology]['Proportion Sample'].replace('%', ''))
-        topologyPopulation = math.floor((proportion * population) / 100)
+
+        initTopologyPoulationDf =  populationCountDf[populationCountDf[TOPOLOGY] == topology]
+
+        # Safely select the first row's value
+        topologyPopulation = initTopologyPoulationDf[selectedProduct].iloc[0]
+        #print(f"initPopulation = {topologyPopulation}")
+        
 
         topologyScore = topologySumDict[topology]
+        
+        #print(f"topologyScore = {topologyScore}")
 
-        topologyPopulation = math.floor(topologyPopulation / 2)
         if topologyScore <= 250:
             topologyPopulation = topologyPopulation / 2
 
@@ -370,8 +395,12 @@ def evaluateProposition(selectedCity, selectedProduct, userProposal,
         else:
             topologyPopulation = math.floor(topologyPopulation * 2)
 
+
         totalSubscriberTakeOut = totalSubscriberTakeOut + topologyPopulation
 
+        
+        #print(f"topologyPopulation = {topologyPopulation} totalSubscriberTakeOut = {totalSubscriberTakeOut}")
+        
     return matchingTopologies, totalSubscriberTakeOut
 
 

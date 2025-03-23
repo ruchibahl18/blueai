@@ -88,6 +88,12 @@ def fetch_db_rows_as_dicts(db_path, table_name):
         if conn:
             conn.close()
 
+def fetchCityPopulationCounts():
+    cityPopulationCountsPath = os.path.abspath(
+        os.path.join(os.getcwd(), DB_DIR, 'city_population.csv'))
+    cityPopulationDf = pd.read_csv(cityPopulationCountsPath, encoding="ISO-8859-1")
+    return cityPopulationDf
+
 
 def fetchTopologies():
     topologiesPath = os.path.abspath(
